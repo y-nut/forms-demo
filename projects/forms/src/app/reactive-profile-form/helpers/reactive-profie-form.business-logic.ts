@@ -23,19 +23,7 @@ export class ReactiveProfileFormBusinessLogic {
         takeUntil(destroy$)
       )
       .subscribe((countryCode) => {
-        // Translation hint and label
-        switch (countryCode) {
-          case CountryCode.CL:
-            profileForm.phoneNumberControl.label = 'Número de teléfono';
-            profileForm.phoneNumberControl.hint = '+56...';
-            break;
-          case CountryCode.US:
-          default:
-            profileForm.phoneNumberControl.label = 'Phone number';
-            profileForm.phoneNumberControl.hint = '+1...';
-            break;
-        }
-
+        ReactiveProfileFormBusinessLogic.translate(profileForm);
         // Validations
         profileForm.phoneNumberControl.clearValidators();
         profileForm.phoneNumberControl.reset('', { emitEvent: false });
@@ -59,5 +47,26 @@ export class ReactiveProfileFormBusinessLogic {
         }
         profileForm.phoneNumberControl.updateValueAndValidity();
       });
+  }
+
+  private static translate(profileForm: ReactiveProfileForm) {
+    profileForm.firstNameControl.label = 'First name';
+    profileForm.lastNameControl.label = 'Last name';
+    profileForm.countryControl.label = 'Country';
+    profileForm.phoneNumberControl.label = 'Phone number';
+    profileForm.phoneNumberControl.hint = '';
+
+    switch (profileForm.countryControl.value) {
+      case CountryCode.CL:
+        profileForm.firstNameControl.label = 'Nombre';
+        profileForm.lastNameControl.label = 'Apellido';
+        profileForm.countryControl.label = 'País';
+        profileForm.phoneNumberControl.label = 'Número de teléfono';
+        profileForm.phoneNumberControl.hint = '+56...';
+        break;
+      case CountryCode.US:
+        profileForm.phoneNumberControl.hint = '+1...';
+        break;
+    }
   }
 }

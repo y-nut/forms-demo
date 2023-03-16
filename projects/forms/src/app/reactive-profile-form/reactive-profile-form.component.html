@@ -3,10 +3,10 @@
 <form [formGroup]="profileForm" class="app-ReactiveProfileForm">
   <fieldset class="app-ReactiveProfileForm-fieldset">
     <legend>
-        Reactive profile form
+      My Profile
     </legend>
 
-    <app-select-control formControlName="country" label="Country" [options]="[
+    <app-select-control formControlName="country" [label]="profileForm.countryControl.label" [options]="[
       {
         label: 'United States',
         value: CountryCode.US
@@ -17,9 +17,9 @@
       }
     ]"/>
 
-    <app-text-control formControlName="firstName" label="First Name" />
+    <app-text-control formControlName="firstName" [label]="profileForm.firstNameControl.label" />
 
-    <app-text-control formControlName="lastName" label="Last Name"/>
+    <app-text-control formControlName="lastName" [label]="profileForm.lastNameControl.label"/>
 
     <app-phone-number-control
       formControlName="phoneNumber"
