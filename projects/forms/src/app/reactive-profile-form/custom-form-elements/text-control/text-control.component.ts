@@ -10,7 +10,7 @@ import { BaseControlDirective } from '../base-control.directive';
     <mat-form-field>
       <mat-label>{{ label }}</mat-label>
       <input
-        [attr.aria-label]="aria['label']"
+        [attr.aria-label]="aria?.['label']"
         [formControl]="textControl"
         matInput
       />

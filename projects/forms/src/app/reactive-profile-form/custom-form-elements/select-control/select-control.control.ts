@@ -5,4 +5,5 @@ export class FormControlExtended extends FormControl {
   hint?: string;
   maxLength?: number;
   minLength?: number;
+  aria?: Record<string, string>;
 }

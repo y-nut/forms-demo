@@ -15,7 +15,7 @@ import {
 export class BaseControlDirective implements ControlValueAccessor {
   @Input() label = '';
   @Input() hint = '';
-  @Input() aria: Record<string, string> = {};
+  @Input() aria: Record<string, string> | undefined;
 
   onChange: any = () => {};
   onTouch: any = () => {};

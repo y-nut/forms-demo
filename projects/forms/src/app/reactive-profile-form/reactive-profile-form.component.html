@@ -3,10 +3,10 @@
 <form [formGroup]="profileForm" class="app-ReactiveProfileForm">
   <fieldset class="app-ReactiveProfileForm-fieldset">
     <legend>
-     {{ 'myProfile' | translate }}
+      {{ 'myProfile' | translate }}
     </legend>
 
-    <app-select-control formControlName="country" [label]="profileForm.countryControl.label ?? ''" [options]="[
+    <app-select-control formControlName="country" [aria]="profileForm.countryControl.aria" [label]="profileForm.countryControl.label ?? ''" [options]="[
       {
         label: 'United States',
         value: CountryCode.US
@@ -17,12 +17,13 @@
       }
     ]"/>
 
-    <app-text-control formControlName="firstName" [label]="profileForm.firstNameControl.label ?? ''" />
+    <app-text-control formControlName="firstName" [aria]="profileForm.firstNameControl.aria"  [label]="profileForm.firstNameControl.label ?? ''" />
 
-    <app-text-control formControlName="lastName" [label]="profileForm.lastNameControl.label ?? ''"/>
+    <app-text-control formControlName="lastName" [aria]="profileForm.lastNameControl.aria"  [label]="profileForm.lastNameControl.label ?? ''"/>
 
     <app-phone-number-control
       formControlName="phoneNumber"
+      [aria]="profileForm.phoneNumberControl.aria"
       [label]="profileForm.phoneNumberControl.label ?? ''"
       [hint]="profileForm.phoneNumberControl.hint ?? ''"
       [maxLength]="profileForm.phoneNumberControl.maxLength"

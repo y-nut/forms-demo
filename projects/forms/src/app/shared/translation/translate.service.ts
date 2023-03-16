@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { distinctUntilChanged, firstValueFrom, Subject, takeUntil } from 'rxjs';
+import { get, has } from 'lodash';
 
 interface TranslationFile {
   locale: string;
@@ -49,13 +50,13 @@ export class TranslateService implements OnDestroy {
 
   instant(key: string): string {
     if (this._currentLanguage in this._languageFile) {
-      if (key in this._languageFile[this._currentLanguage]) {
-        return this._languageFile[this._currentLanguage][key] ?? '';
+      if (has(this._languageFile[this._currentLanguage], key)) {
+        return get(this._languageFile[this._currentLanguage], key) ?? '';
       }
     }
     if (this._defaultLanguage in this._languageFile) {
-      if (key in this._languageFile[this._defaultLanguage]) {
-        return this._languageFile[this._defaultLanguage][key] ?? '';
+      if (has(this._languageFile[this._defaultLanguage], key)) {
+        return get(this._languageFile[this._defaultLanguage], key) ?? '';
       }
     }
 

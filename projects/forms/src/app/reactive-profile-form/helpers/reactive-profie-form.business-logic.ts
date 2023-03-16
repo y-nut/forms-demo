@@ -57,6 +57,10 @@ export class ReactiveProfileFormBusinessLogic {
     profileForm.phoneNumberControl.hint = '';
     profileForm.phoneNumberControl.minLength = undefined;
     profileForm.phoneNumberControl.maxLength = undefined;
+    profileForm.firstNameControl.aria = { label: 'Your first name' };
+    profileForm.lastNameControl.aria = { label: 'Your last name' };
+    profileForm.countryControl.aria = { label: 'Your country' };
+    profileForm.phoneNumberControl.aria = { label: 'your phone number' };
 
     switch (profileForm.countryControl.value) {
       case CountryCode.CL:
