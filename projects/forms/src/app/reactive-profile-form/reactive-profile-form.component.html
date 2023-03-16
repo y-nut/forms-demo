@@ -6,7 +6,7 @@
       My Profile
     </legend>
 
-    <app-select-control formControlName="country" [label]="profileForm.countryControl.label" [options]="[
+    <app-select-control formControlName="country" [label]="profileForm.countryControl.label ?? ''" [options]="[
       {
         label: 'United States',
         value: CountryCode.US
@@ -17,14 +17,15 @@
       }
     ]"/>
 
-    <app-text-control formControlName="firstName" [label]="profileForm.firstNameControl.label" />
+    <app-text-control formControlName="firstName" [label]="profileForm.firstNameControl.label ?? ''" />
 
-    <app-text-control formControlName="lastName" [label]="profileForm.lastNameControl.label"/>
+    <app-text-control formControlName="lastName" [label]="profileForm.lastNameControl.label ?? ''"/>
 
     <app-phone-number-control
       formControlName="phoneNumber"
-      [label]="profileForm.phoneNumberControl.label"
-      [hint]="profileForm.phoneNumberControl.hint"
+      [label]="profileForm.phoneNumberControl.label ?? ''"
+      [hint]="profileForm.phoneNumberControl.hint ?? ''"
+      [maxLength]="profileForm.phoneNumberControl.maxLength"
     />
 
   </fieldset>

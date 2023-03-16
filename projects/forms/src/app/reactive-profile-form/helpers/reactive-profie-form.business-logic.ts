@@ -55,6 +55,8 @@ export class ReactiveProfileFormBusinessLogic {
     profileForm.countryControl.label = 'Country';
     profileForm.phoneNumberControl.label = 'Phone number';
     profileForm.phoneNumberControl.hint = '';
+    profileForm.phoneNumberControl.minLength = undefined;
+    profileForm.phoneNumberControl.maxLength = undefined;
 
     switch (profileForm.countryControl.value) {
       case CountryCode.CL:
@@ -63,9 +65,13 @@ export class ReactiveProfileFormBusinessLogic {
         profileForm.countryControl.label = 'País';
         profileForm.phoneNumberControl.label = 'Número de teléfono';
         profileForm.phoneNumberControl.hint = '+56...';
+        profileForm.phoneNumberControl.minLength = phoneNumberRegex.CL.length;
+        profileForm.phoneNumberControl.maxLength = phoneNumberRegex.CL.length;
         break;
       case CountryCode.US:
         profileForm.phoneNumberControl.hint = '+1...';
+        profileForm.phoneNumberControl.minLength = phoneNumberRegex.US.length;
+        profileForm.phoneNumberControl.maxLength = phoneNumberRegex.US.length;
         break;
     }
   }
