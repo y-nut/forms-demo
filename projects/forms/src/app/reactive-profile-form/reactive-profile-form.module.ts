@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SelectControlComponent } from './custom-form-elements/select-control/select-control.component';
 import { TextControlComponent } from './custom-form-elements/text-control/text-control.component';
 import { PhoneNumberControlComponent } from './custom-form-elements/phone-number-control/phone-number-control.component';
+import { TranslateModule } from '../shared/translation/translate.module';
 
 @NgModule({
   declarations: [ReactiveProfileFormComponent],
@@ -16,6 +17,7 @@ import { PhoneNumberControlComponent } from './custom-form-elements/phone-number
     TextControlComponent,
     PhoneNumberControlComponent,
     ReactiveProfileFormRoutingModule,
+    TranslateModule,
   ],
 })
 export class ReactiveProfileFormModule {}

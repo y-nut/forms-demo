@@ -3,7 +3,7 @@
 <form [formGroup]="profileForm" class="app-ReactiveProfileForm">
   <fieldset class="app-ReactiveProfileForm-fieldset">
     <legend>
-      My Profile
+     {{ 'myProfile' | translate }}
     </legend>
 
     <app-select-control formControlName="country" [label]="profileForm.countryControl.label ?? ''" [options]="[
