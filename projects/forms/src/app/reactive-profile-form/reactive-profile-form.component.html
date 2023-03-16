@@ -1,0 +1,33 @@
+
+
+<form [formGroup]="profileForm" class="app-ReactiveProfileForm">
+  <fieldset class="app-ReactiveProfileForm-fieldset">
+    <legend>
+        Reactive profile form
+    </legend>
+
+    <app-select-control formControlName="country" label="Country" [options]="[
+      {
+        label: 'United States',
+        value: CountryCode.US
+      },
+      {
+        label: 'Chile',
+        value: CountryCode.CL
+      }
+    ]"/>
+
+    <app-text-control formControlName="firstName" label="First Name" />
+
+    <app-text-control formControlName="lastName" label="Last Name"/>
+
+    <app-phone-number-control
+      formControlName="phoneNumber"
+      [label]="profileForm.phoneNumberControl.label"
+      [hint]="profileForm.phoneNumberControl.hint"
+    />
+
+  </fieldset>
+ </form>
+
+
