@@ -27,10 +27,10 @@ export class CustomErrorDirective implements OnChanges {
       );
       if (validationErrors) {
         switch (true) {
-          case validationErrors['required']:
+          case 'required' in validationErrors:
             this.spanElement.textContent = 'This field is required';
             break;
-          case validationErrors['pattern']:
+          case 'pattern' in validationErrors:
             this.spanElement.textContent = 'Invalid pattern';
             break;
           default:
