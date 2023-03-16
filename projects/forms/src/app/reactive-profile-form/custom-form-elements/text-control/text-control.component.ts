@@ -9,7 +9,11 @@ import { BaseControlDirective } from '../base-control.directive';
   template: `
     <mat-form-field>
       <mat-label>{{ label }}</mat-label>
-      <input [formControl]="textControl" matInput />
+      <input
+        [attr.aria-label]="aria['label']"
+        [formControl]="textControl"
+        matInput
+      />
     </mat-form-field>
   `,
   styleUrls: ['./text-control.component.scss'],

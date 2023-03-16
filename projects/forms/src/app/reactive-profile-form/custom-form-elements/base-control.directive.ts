@@ -15,6 +15,7 @@ import {
 export class BaseControlDirective implements ControlValueAccessor {
   @Input() label = '';
   @Input() hint = '';
+  @Input() aria: Record<string, string> = {};
 
   onChange: any = () => {};
   onTouch: any = () => {};
@@ -54,6 +55,7 @@ export class BaseControlDirective implements ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
+    if (this.control.value === obj) return;
     this.control.setValue(obj, { emitEvent: false });
   }
   registerOnChange(fn: (value: string) => void) {

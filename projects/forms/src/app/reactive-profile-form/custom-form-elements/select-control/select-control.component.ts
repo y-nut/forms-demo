@@ -10,7 +10,10 @@ import { BaseControlDirective } from '../base-control.directive';
   template: `
     <mat-form-field>
       <mat-label>{{ label }}</mat-label>
-      <mat-select [formControl]="selectControl">
+      <mat-select
+        [attr.aria-label]="aria['label']"
+        [formControl]="selectControl"
+      >
         <mat-option *ngFor="let option of options" [value]="option.value">{{
           option.label
         }}</mat-option>

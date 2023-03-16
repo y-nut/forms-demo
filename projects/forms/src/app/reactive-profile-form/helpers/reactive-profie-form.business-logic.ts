@@ -38,6 +38,7 @@ export class ReactiveProfileFormBusinessLogic {
 
         // Validations
         profileForm.phoneNumberControl.clearValidators();
+        profileForm.phoneNumberControl.reset('', { emitEvent: false });
         switch (countryCode) {
           case CountryCode.US:
             profileForm.phoneNumberControl.setValidators([

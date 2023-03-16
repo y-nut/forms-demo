@@ -10,7 +10,12 @@ import { BaseControlDirective } from '../base-control.directive';
   template: `
     <mat-form-field>
       <mat-label>{{ label }}</mat-label>
-      <input [formControl]="phoneControl" matInput type="tel" />
+      <input
+        [attr.aria-label]="aria['label']"
+        [formControl]="phoneControl"
+        matInput
+        type="tel"
+      />
       <mat-hint>{{ hint }}</mat-hint>
       <mat-error *ngIf="phoneControl.invalid">
         {{ phoneControl.errors | json }}
