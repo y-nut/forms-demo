@@ -3,7 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ReactiveProfileForm } from './helpers/reactive-profile-form.form';
 import { ReactiveProfileFormBusinessLogic } from './helpers/reactive-profie-form.business-logic';
 import { CountryCode } from '../shared/enums/country-code.enum';
-import { TranslateService } from '../shared/translation/translate.service';
+import { TranslateService } from '../translation/translate.service';
 import { Language } from '../shared/enums/language.enum';
 
 @Component({
