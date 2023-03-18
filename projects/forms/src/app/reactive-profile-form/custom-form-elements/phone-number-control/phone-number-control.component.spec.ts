@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PhoneNumberControlComponent } from './phone-number-control.component';
 
 describe('PhoneNumberControlComponent', () => {
@@ -8,9 +8,8 @@ describe('PhoneNumberControlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ PhoneNumberControlComponent ]
-    })
-    .compileComponents();
+      imports: [PhoneNumberControlComponent, NoopAnimationsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PhoneNumberControlComponent);
     component = fixture.componentInstance;
