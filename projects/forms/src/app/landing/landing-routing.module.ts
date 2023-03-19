@@ -14,6 +14,20 @@ const routes: Routes = [
         (m) => m.ReactiveProfileFormModule
       ),
   },
+  {
+    path: 'reactive-form-example',
+    loadComponent: () =>
+      import('./../examples/reactive-form-example.component').then(
+        (m) => m.ReactiveFormExampleComponent
+      ),
+  },
+  {
+    path: 'template-driven-form-example',
+    loadComponent: () =>
+      import('./../examples/template-driven-form-example.component').then(
+        (m) => m.TemplateDrivenFormExampleComponent
+      ),
+  },
 ];
 
 @NgModule({
