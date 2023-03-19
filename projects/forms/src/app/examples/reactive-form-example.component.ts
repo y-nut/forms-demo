@@ -43,7 +43,7 @@ export class ReactiveFormExampleComponent {
       [
         Validators.required,
         Validators.minLength(4),
-        forbiddenNameValidator(/bob/i), // <-- Here's how you pass in the custom validator.
+        forbiddenNameValidator(/bob/i),
       ],
     ],
     alterEgo: '',

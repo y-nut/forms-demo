@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MatFormField, MAT_FORM_FIELD } from '@angular/material/form-field';
-import { StringifyPipe } from '../../../shared/pipes/stringify.pipe';
+import { StringifyPipe } from '../../shared/pipes/stringify.pipe';
 import { CustomErrorDirective } from './custom-error.directive';
 
 @Component({

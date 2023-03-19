@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormControlExtended } from '../custom-form-elements/select-control/select-control.control';
+import { FormControlExtended } from '../../custom-form-elements/select-control/select-control.control';
 
 const formBuilder = new FormBuilder();
 export class ReactiveProfileForm extends FormGroup {

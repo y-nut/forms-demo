@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PhoneNumberControlComponent } from './phone-number-control.component';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { runOnPushChangeDetection } from './../../../testing/on-push-change-detection.helper';
+import { runOnPushChangeDetection } from '../../testing/on-push-change-detection.helper';
 
 describe('PhoneNumberControlComponent', () => {
   let component: PhoneNumberControlComponent;

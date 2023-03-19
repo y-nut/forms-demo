@@ -8,10 +8,10 @@ import {
 } from '@angular/material/form-field';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '../translation/translate.module';
-import { DatePickerComponent } from './custom-form-elements/date-picker/date-picker.component';
-import { PhoneNumberControlComponent } from './custom-form-elements/phone-number-control/phone-number-control.component';
-import { SelectControlComponent } from './custom-form-elements/select-control/select-control.component';
-import { TextControlComponent } from './custom-form-elements/text-control/text-control.component';
+import { DatePickerComponent } from '../custom-form-elements/date-picker/date-picker.component';
+import { PhoneNumberControlComponent } from '../custom-form-elements/phone-number-control/phone-number-control.component';
+import { SelectControlComponent } from '../custom-form-elements/select-control/select-control.component';
+import { TextControlComponent } from '../custom-form-elements/text-control/text-control.component';
 import { ReactiveProfileFormComponent } from './reactive-profile-form.component';
 
 describe('ReactiveProfileFormComponent', () => {
