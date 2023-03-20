@@ -5,6 +5,7 @@ import { ReactiveProfileFormBusinessLogic } from './helpers/reactive-profie-form
 import { CountryCode } from '../shared/enums/country-code.enum';
 import { TranslateService } from '../translation/translate.service';
 import { Language } from '../shared/enums/language.enum';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-profile-form',
@@ -15,6 +16,8 @@ export class ReactiveProfileFormComponent implements OnDestroy, OnInit {
   private _destroy$ = new Subject<void>();
   profileForm!: ReactiveProfileForm;
   CountryCode = CountryCode;
+
+  seeValues = new FormControl(false);
 
   constructor(private translateService: TranslateService) {}
 

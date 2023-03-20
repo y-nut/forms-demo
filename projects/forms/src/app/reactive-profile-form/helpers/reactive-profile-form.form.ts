@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FormControlExtended } from '../../custom-form-elements/select-control/select-control.control';
 
 const formBuilder = new FormBuilder();
@@ -7,6 +7,7 @@ export class ReactiveProfileForm extends FormGroup {
   phoneNumberControl!: FormControlExtended;
   firstNameControl!: FormControlExtended;
   lastNameControl!: FormControlExtended;
+  interestsArray!: FormArray;
 
   constructor(reactiveProfile?: ReactiveProfileFormKeys) {
     super(ReactiveProfileForm.buildForm().controls);
@@ -15,6 +16,9 @@ export class ReactiveProfileForm extends FormGroup {
     this.phoneNumberControl = this.get('phoneNumber') as FormControlExtended;
     this.firstNameControl = this.get('firstName') as FormControlExtended;
     this.lastNameControl = this.get('lastName') as FormControlExtended;
+    this.interestsArray = this.get('interests') as FormArray;
+
+    this.addInterest();
   }
 
   static buildForm(): FormGroup<{
@@ -25,7 +29,13 @@ export class ReactiveProfileForm extends FormGroup {
       lastName: '',
       country: '',
       phoneNumber: '',
+      interests: formBuilder.array([]),
     });
+  }
+
+  addInterest(): void {
+    const control = formBuilder.control('');
+    this.interestsArray.push(control);
   }
 }
 
@@ -34,4 +44,5 @@ export interface ReactiveProfileFormKeys {
   lastName: string;
   country: string;
   phoneNumber: string;
+  interests: string[];
 }

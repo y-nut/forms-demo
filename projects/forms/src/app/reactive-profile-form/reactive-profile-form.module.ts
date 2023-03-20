@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveProfileFormRoutingModule } from './reactive-profile-form-routing.module';
 import { ReactiveProfileFormComponent } from './reactive-profile-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +8,7 @@ import { SelectControlComponent } from '../custom-form-elements/select-control/s
 import { TextControlComponent } from '../custom-form-elements/text-control/text-control.component';
 import { PhoneNumberControlComponent } from '../custom-form-elements/phone-number-control/phone-number-control.component';
 import { TranslateModule } from '../translation/translate.module';
+import { InterestComponent } from './components/interests.component';
 
 @NgModule({
   declarations: [ReactiveProfileFormComponent],
@@ -17,7 +19,9 @@ import { TranslateModule } from '../translation/translate.module';
     TextControlComponent,
     PhoneNumberControlComponent,
     ReactiveProfileFormRoutingModule,
+    InterestComponent,
     TranslateModule,
+    MatSlideToggleModule,
   ],
 })
 export class ReactiveProfileFormModule {}

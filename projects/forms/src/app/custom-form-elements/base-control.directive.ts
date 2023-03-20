@@ -36,19 +36,17 @@ export class BaseControlDirective implements ControlValueAccessor {
   }
 
   get control(): FormControl {
-    switch (!this._setControl) {
-      case this.ngControl instanceof FormControlName:
-        const formControlName = this.ngControl as FormControlName;
-        if (
-          typeof formControlName.name === 'string' &&
-          this.formGroupDirective
-        ) {
-          this._control = this.formGroupDirective.form.get(
-            formControlName.name
-          ) as FormControl;
-          this._setControl = true;
-        }
-        break;
+    if (!this._setControl) {
+      const formControlName = this.ngControl as FormControlName;
+      if (typeof formControlName.name === 'string' && this.formGroupDirective) {
+        this._control = this.formGroupDirective.form.get(
+          formControlName.name
+        ) as FormControl;
+        this._setControl = true;
+      } else if (this.ngControl?.control) {
+        this._control = this.ngControl?.control as FormControl;
+        this._setControl = true;
+      }
     }
 
     return this._control;

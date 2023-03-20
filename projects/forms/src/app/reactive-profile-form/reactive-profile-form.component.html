@@ -29,7 +29,15 @@
       [maxLength]="profileForm.phoneNumberControl.maxLength"
     />
 
+    <h2>Interests</h2>
+    <app-interest *ngFor="let interest of profileForm.interestsArray.controls; let i = index" [index]="i"></app-interest>
+
   </fieldset>
+
+  <mat-slide-toggle  [formControl]="seeValues">See values</mat-slide-toggle>
+  <pre *ngIf="seeValues.value">
+    {{ profileForm.value | json }}
+  </pre>
  </form>
 
 
