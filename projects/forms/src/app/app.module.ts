@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     TranslateModule.forRoot({
       currentLanguage: Language.ES,
       defaultLanguage: Language.ES,
+      // initialLoadLanguages: [Language.ES, Language.EN],
     }),
   ],
   bootstrap: [AppComponent],

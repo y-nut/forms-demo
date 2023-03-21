@@ -1,6 +1,20 @@
 {
   "locale": "en-US",
   "translations": {
-    "myProfile": "My Profile"
+    "myProfile": "My Profile",
+    "interests": "interests",
+    "displayName": "Full name",
+    "country": "Country",
+    "phoneNumber": "Phone number",
+    "yourDisplayName": "Your full name",
+    "yourCountry": "Choose your country",
+    "yourPhone": "Provide your phone number with country code",
+    "interest":"Interest",
+    "addInterest":"Add interest",
+    "removeInterest":"Remove interest",
+    "countries": {
+      "US":"United States",
+      "CL": "Chile"
+    }
   }
 }

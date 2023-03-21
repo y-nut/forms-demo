@@ -13,6 +13,8 @@ import {
   ReactiveProfileForm,
 } from '../helpers/reactive-profile-form.form';
 import { TextControlComponent } from '../../custom-form-elements/text-control/text-control.component';
+import { TranslateModule } from '../../translation/translate.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-interest',
@@ -24,17 +26,21 @@ import { TextControlComponent } from '../../custom-form-elements/text-control/te
     MatButtonModule,
     MatIconModule,
     TextControlComponent,
+    TranslateModule,
+    MatTooltipModule,
   ],
   template: `
     <ng-container [formGroup]="interestGroup">
       <mat-card>
         <mat-card-content class="app-interest-card-content">
-          <app-text-control [formControl]="interestGroup.nameControl" label="interest"/>
+          <app-text-control [formControl]="interestGroup.nameControl" [label]="'interest' | translate"/>
           <button
             type="button"
             mat-icon-button
             color="primary"
             (click)="profileForm.addInterest()"
+            [matTooltip]="'addInterest' | translate"
+            [attr.aria-label]="'addInterest' | translate"
           >
             <mat-icon inline>add</mat-icon>
           </button>
@@ -42,6 +48,8 @@ import { TextControlComponent } from '../../custom-form-elements/text-control/te
             type="button"
             mat-icon-button
             color="warn"
+            [matTooltip]="'removeInterest' | translate"
+            [attr.aria-label]="'removeInterest' | translate"
             (click)="removeInterest()"
           >
             <mat-icon inline>delete</mat-icon>

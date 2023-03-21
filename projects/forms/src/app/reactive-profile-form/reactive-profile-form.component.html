@@ -8,18 +8,17 @@
 
     <app-select-control formControlName="country" [aria]="profileForm.countryControl.aria" [label]="profileForm.countryControl.label ?? ''" [options]="[
       {
-        label: 'United States',
+        label: ('countries.'+CountryCode.US | translate) + '',
         value: CountryCode.US
       },
       {
-        label: 'Chile',
+        label: ('countries.'+CountryCode.CL | translate) + '',
         value: CountryCode.CL
       }
     ]"/>
 
-    <app-text-control formControlName="firstName" [aria]="profileForm.firstNameControl.aria"  [label]="profileForm.firstNameControl.label ?? ''" />
+    <app-text-control formControlName="displayName" [aria]="profileForm.displayNameControl.aria"  [label]="profileForm.displayNameControl.label ?? ''" />
 
-    <app-text-control formControlName="lastName" [aria]="profileForm.lastNameControl.aria"  [label]="profileForm.lastNameControl.label ?? ''"/>
 
     <app-phone-number-control
       formControlName="phoneNumber"

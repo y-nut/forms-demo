@@ -1,22 +1,30 @@
+import { Injector } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { distinctUntilChanged, startWith, Subject, takeUntil } from 'rxjs';
+import { distinctUntilChanged, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { CountryCode } from '../../shared/enums/country-code.enum';
+import { Language } from '../../shared/enums/language.enum';
 import { phoneNumberRegex } from '../../shared/enums/phone-number-regex.enum';
+import { TranslateService } from '../../translation/translate.service';
 import { ReactiveProfileForm } from './reactive-profile-form.form';
 
 export class ReactiveProfileFormBusinessLogic {
-  static applyBusinessLogic(
+  constructor(private injector: Injector) {}
+
+  applyBusinessLogic(
     profileForm: ReactiveProfileForm,
     destroy$: Subject<void>
   ) {
-    ReactiveProfileFormBusinessLogic.handleCountryChange(profileForm, destroy$);
-
-    const nameValidator = [Validators.minLength(2), Validators.maxLength(10)];
-    profileForm.firstNameControl.setValidators(nameValidator);
-    profileForm.lastNameControl.setValidators(nameValidator);
+    this.handleCountryChange(profileForm, destroy$);
+    profileForm.displayNameControl.minLength = 2;
+    profileForm.displayNameControl.maxLength = 10;
+    const nameValidator = [
+      Validators.minLength(profileForm.displayNameControl.minLength),
+      Validators.maxLength(profileForm.displayNameControl.maxLength),
+    ];
+    profileForm.displayNameControl.setValidators(nameValidator);
   }
 
-  private static handleCountryChange(
+  private handleCountryChange(
     profileForm: ReactiveProfileForm,
     destroy$: Subject<void>
   ): void {
@@ -24,59 +32,67 @@ export class ReactiveProfileFormBusinessLogic {
       .pipe(
         startWith(profileForm.countryControl.value),
         distinctUntilChanged(),
-        takeUntil(destroy$)
+        takeUntil(destroy$),
+        tap((countryCode) => {
+          switch (countryCode) {
+            case CountryCode.US:
+              this.translateService.setCurrentLanguage(Language.EN);
+              break;
+            case CountryCode.CL:
+              this.translateService.setCurrentLanguage(Language.ES);
+              break;
+          }
+        })
       )
       .subscribe((countryCode) => {
-        ReactiveProfileFormBusinessLogic.translate(profileForm);
         // Validations
         profileForm.phoneNumberControl.clearValidators();
         profileForm.phoneNumberControl.reset('', { emitEvent: false });
+        profileForm.phoneNumberControl.hint = '';
         switch (countryCode) {
           case CountryCode.US:
             profileForm.phoneNumberControl.setValidators([
               Validators.required,
               Validators.pattern(phoneNumberRegex.US.regex),
             ]);
+            profileForm.phoneNumberControl.hint = '+1...';
             break;
           case CountryCode.CL:
             profileForm.phoneNumberControl.setValidators([
               Validators.required,
               Validators.pattern(phoneNumberRegex.CL.regex),
             ]);
+            profileForm.phoneNumberControl.hint = '+56...';
             break;
         }
         profileForm.phoneNumberControl.updateValueAndValidity();
       });
+
+    this.translateService.changeLanguage$
+      .pipe(takeUntil(destroy$), startWith(''))
+      .subscribe(() => {
+        this.translateFields(profileForm);
+      });
   }
 
-  private static translate(profileForm: ReactiveProfileForm) {
-    profileForm.firstNameControl.label = 'First name';
-    profileForm.lastNameControl.label = 'Last name';
-    profileForm.countryControl.label = 'Country';
-    profileForm.phoneNumberControl.label = 'Phone number';
-    profileForm.phoneNumberControl.hint = '';
-    profileForm.phoneNumberControl.minLength = undefined;
-    profileForm.phoneNumberControl.maxLength = undefined;
-    profileForm.firstNameControl.aria = { label: 'Your first name' };
-    profileForm.lastNameControl.aria = { label: 'Your last name' };
-    profileForm.countryControl.aria = { label: 'Your country' };
-    profileForm.phoneNumberControl.aria = { label: 'your phone number' };
+  get translateService(): TranslateService {
+    return this.injector.get(TranslateService);
+  }
 
-    switch (profileForm.countryControl.value) {
-      case CountryCode.CL:
-        profileForm.firstNameControl.label = 'Nombre';
-        profileForm.lastNameControl.label = 'Apellido';
-        profileForm.countryControl.label = 'País';
-        profileForm.phoneNumberControl.label = 'Número de teléfono';
-        profileForm.phoneNumberControl.hint = '+56...';
-        profileForm.phoneNumberControl.minLength = phoneNumberRegex.CL.length;
-        profileForm.phoneNumberControl.maxLength = phoneNumberRegex.CL.length;
-        break;
-      case CountryCode.US:
-        profileForm.phoneNumberControl.hint = '+1...';
-        profileForm.phoneNumberControl.minLength = phoneNumberRegex.US.length;
-        profileForm.phoneNumberControl.maxLength = phoneNumberRegex.US.length;
-        break;
-    }
+  private translate(key: string): string {
+    return this.translateService.instant(key);
+  }
+
+  private translateFields(profileForm: ReactiveProfileForm) {
+    profileForm.displayNameControl.label = this.translate('displayName');
+    profileForm.countryControl.label = this.translate('country');
+    profileForm.phoneNumberControl.label = this.translate('phoneNumber');
+    profileForm.displayNameControl.aria = {
+      label: this.translate('yourFirstName'),
+    };
+    profileForm.countryControl.aria = { label: this.translate('yourCountry') };
+    profileForm.phoneNumberControl.aria = {
+      label: this.translate('yourPhone'),
+    };
   }
 }

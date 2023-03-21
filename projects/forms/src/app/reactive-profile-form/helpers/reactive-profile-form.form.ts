@@ -5,8 +5,7 @@ const formBuilder = new FormBuilder();
 export class ReactiveProfileForm extends FormGroup {
   countryControl!: FormControlExtended;
   phoneNumberControl!: FormControlExtended;
-  firstNameControl!: FormControlExtended;
-  lastNameControl!: FormControlExtended;
+  displayNameControl!: FormControlExtended;
   interestsArray!: FormArray<InterestGroup>;
 
   constructor(reactiveProfile?: ReactiveProfileFormKeys) {
@@ -14,8 +13,7 @@ export class ReactiveProfileForm extends FormGroup {
     this.patchValue(reactiveProfile ?? {});
     this.countryControl = this.get('country') as FormControlExtended;
     this.phoneNumberControl = this.get('phoneNumber') as FormControlExtended;
-    this.firstNameControl = this.get('firstName') as FormControlExtended;
-    this.lastNameControl = this.get('lastName') as FormControlExtended;
+    this.displayNameControl = this.get('displayName') as FormControlExtended;
     this.interestsArray = this.get('interests') as FormArray<InterestGroup>;
 
     this.addInterest();
@@ -25,8 +23,7 @@ export class ReactiveProfileForm extends FormGroup {
     [Name in keyof ReactiveProfileFormKeys]: any;
   }> {
     return formBuilder.group({
-      firstName: '',
-      lastName: '',
+      displayName: '',
       country: '',
       phoneNumber: '',
       interests: formBuilder.array([]),
@@ -61,8 +58,7 @@ export class InterestGroup extends FormGroup {
 }
 
 export interface ReactiveProfileFormKeys {
-  firstName: string;
-  lastName: string;
+  displayName: string;
   country: string;
   phoneNumber: string;
   interests: Interest[];

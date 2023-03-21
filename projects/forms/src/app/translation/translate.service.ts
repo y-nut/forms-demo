@@ -60,10 +60,10 @@ export class TranslateService implements OnDestroy {
       }
     }
 
-    return '';
+    return key;
   }
 
-  private loadTranslations(language: string): Promise<boolean> {
+  loadTranslations(language: string): Promise<boolean> {
     if (language in this._languageFile) {
       return Promise.resolve(true);
     }

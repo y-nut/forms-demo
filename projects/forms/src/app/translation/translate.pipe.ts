@@ -4,7 +4,7 @@ import {
   Pipe,
   PipeTransform,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { startWith, Subscription } from 'rxjs';
 import { TranslateService } from './translate.service';
 
 @Pipe({
@@ -14,24 +14,24 @@ import { TranslateService } from './translate.service';
 })
 export class TranslatePipe implements PipeTransform, OnDestroy {
   private subscription = Subscription.EMPTY;
-  private value?: string;
+  private value?: string | undefined;
 
   constructor(
     private translate: TranslateService,
     private cd: ChangeDetectorRef
   ) {}
 
-  transform(key: string): unknown {
+  transform(key: string): string {
     if (!this.value) {
       this.value = this.translate.instant(key);
       this.cd.markForCheck();
 
-      this.subscription = this.translate.currentLanguageFile$.subscribe(
-        (file) => {
+      this.subscription = this.translate.changeLanguage$
+        .pipe(startWith(''))
+        .subscribe(() => {
           this.value = this.translate.instant(key);
           this.cd.markForCheck();
-        }
-      );
+        });
     }
 
     return this.value;

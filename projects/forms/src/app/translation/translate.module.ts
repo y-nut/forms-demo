@@ -8,6 +8,7 @@ export const TRANSLATION_TOKEN = new InjectionToken('TRANSLATION_TOKEN');
 export interface TranslationConfig {
   currentLanguage: string;
   defaultLanguage: string;
+  initialLoadLanguages?: string[];
 }
 
 @NgModule({
@@ -27,11 +28,23 @@ export class TranslateModule {
         {
           provide: APP_INITIALIZER,
           useFactory:
-            (translateService: TranslateService) => (): Promise<boolean> => {
+            (translateService: TranslateService) => (): Promise<boolean[]> => {
+              const loadLanguages = (): Promise<boolean> => {
+                if (!Array.isArray(config.initialLoadLanguages)) {
+                  return Promise.resolve(true);
+                }
+
+                const promises = config.initialLoadLanguages.map((language) => {
+                  return translateService.loadTranslations(language);
+                });
+                return Promise.all(promises).then(() => true);
+              };
+
               translateService.setDefaultLanguage(config.defaultLanguage);
-              return translateService.setCurrentLanguage(
-                config.currentLanguage
-              );
+              return Promise.all([
+                translateService.setCurrentLanguage(config.currentLanguage),
+                loadLanguages(),
+              ]);
             },
           multi: true,
           deps: [TranslateService],

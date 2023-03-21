@@ -13,8 +13,8 @@ import {
   },
 })
 export class BaseControlDirective implements ControlValueAccessor {
-  @Input() label = '';
-  @Input() hint = '';
+  @Input() label: string | undefined = '';
+  @Input() hint: string | undefined = '';
   @Input() aria: Record<string, string> | undefined;
 
   onChange: any = () => {};

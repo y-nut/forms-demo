@@ -1,11 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { ReactiveProfileForm } from './helpers/reactive-profile-form.form';
 import { ReactiveProfileFormBusinessLogic } from './helpers/reactive-profie-form.business-logic';
 import { CountryCode } from '../shared/enums/country-code.enum';
-import { TranslateService } from '../translation/translate.service';
-import { Language } from '../shared/enums/language.enum';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-profile-form',
@@ -17,27 +14,12 @@ export class ReactiveProfileFormComponent implements OnDestroy, OnInit {
   profileForm!: ReactiveProfileForm;
   CountryCode = CountryCode;
 
-  constructor(private translateService: TranslateService) {}
+  constructor(private injector: Injector) {}
 
   ngOnInit(): void {
     this.profileForm = new ReactiveProfileForm();
-    ReactiveProfileFormBusinessLogic.applyBusinessLogic(
-      this.profileForm,
-      this._destroy$
-    );
-
-    this.profileForm.countryControl.valueChanges
-      .pipe(takeUntil(this._destroy$))
-      .subscribe((value) => {
-        switch (value) {
-          case CountryCode.US:
-            this.translateService.setCurrentLanguage(Language.EN);
-            break;
-          case CountryCode.CL:
-            this.translateService.setCurrentLanguage(Language.ES);
-            break;
-        }
-      });
+    const businessRules = new ReactiveProfileFormBusinessLogic(this.injector);
+    businessRules.applyBusinessLogic(this.profileForm, this._destroy$);
   }
 
   ngOnDestroy(): void {
