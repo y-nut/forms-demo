@@ -29,23 +29,22 @@ import { InterestComponent } from './interest.component';
       }
     `,
   ],
-  host: {
-    class: 'app-interests-list',
-  },
   viewProviders: [
     {
       provide: ControlContainer,
       useExisting: FormGroupDirective,
     },
   ],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div formArrayName="interests">
       <h2>Interests</h2>
+      <div class="app-interests-list">
       <app-interest
           *ngFor="let interestGroup of interestsArray.controls; index as index"
           [formGroupName]="index"/>
+      </div>
+
     </div>
   `,
 })
