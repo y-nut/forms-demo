@@ -17,8 +17,6 @@ export class ReactiveProfileFormComponent implements OnDestroy, OnInit {
   profileForm!: ReactiveProfileForm;
   CountryCode = CountryCode;
 
-  seeValues = new FormControl(false);
-
   constructor(private translateService: TranslateService) {}
 
   ngOnInit(): void {

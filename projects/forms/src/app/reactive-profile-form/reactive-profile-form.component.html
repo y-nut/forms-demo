@@ -33,8 +33,8 @@
 
   </fieldset>
 
-  <mat-slide-toggle  [formControl]="seeValues">See values</mat-slide-toggle>
-  <pre *ngIf="seeValues.value">
+  <mat-slide-toggle #toggle >See values</mat-slide-toggle>
+  <pre *ngIf="toggle.checked">
     {{ profileForm.value | json }}
   </pre>
  </form>
