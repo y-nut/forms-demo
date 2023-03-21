@@ -1,6 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
+  ControlContainer,
   FormArray,
   FormArrayName,
   FormGroupDirective,
@@ -8,10 +10,13 @@ import {
 } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  InterestGroup,
-  ReactiveProfileForm,
-} from '../helpers/reactive-profile-form.form';
+  FakeControlContainer,
+  FormGroupDirectiveProvider,
+} from '../../testing/control-providers.helper';
+import { TranslateModule } from '../../translation/translate.module';
+import { ReactiveProfileForm } from '../helpers/reactive-profile-form.form';
 import { InterestComponent } from './interest.component';
+import { InterestGroup } from './interest.form';
 import { InterestsComponent } from './interests.component';
 
 describe('InterestsComponent', () => {
@@ -25,25 +30,13 @@ describe('InterestsComponent', () => {
         InterestsComponent,
         ReactiveFormsModule,
         NoopAnimationsModule,
+        HttpClientTestingModule,
+        TranslateModule.forRoot({
+          currentLanguage: 'en',
+          defaultLanguage: 'en',
+        }),
       ],
-      providers: [
-        {
-          provide: FormArrayName,
-          useFactory: () => {
-            return {
-              control: new FormArray([new InterestGroup()]),
-            };
-          },
-        },
-        {
-          provide: FormGroupDirective,
-          useFactory: () => {
-            const formGroupDirective = new FormGroupDirective([], []);
-            formGroupDirective.form = new ReactiveProfileForm();
-            return formGroupDirective;
-          },
-        },
-      ],
+      providers: [FormGroupDirectiveProvider],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 

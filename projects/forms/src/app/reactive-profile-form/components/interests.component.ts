@@ -55,6 +55,7 @@ import { MatIconModule } from '@angular/material/icon';
           [matTooltip]="'addInterest' | translate"
           [attr.aria-label]="'addInterest' | translate"
           (click)="profileForm.addInterest()"
+
         >
           <mat-icon>add</mat-icon>
         </button>
@@ -62,7 +63,9 @@ import { MatIconModule } from '@angular/material/icon';
       <div class="app-interests-list">
         <app-interest
             *ngFor="let interestGroup of profileForm.interestsArray.controls; index as index"
-            [formGroupName]="index"/>
+            [formGroupName]="index"
+            (action)="action($event, index)"
+          />
       </div>
 
     </div>
@@ -72,5 +75,16 @@ export class InterestsComponent {
   constructor(private controlContainer: ControlContainer) {}
   get profileForm(): ReactiveProfileForm {
     return this.controlContainer.control as ReactiveProfileForm;
+  }
+
+  action(action: 'add' | 'remove', index: number): void {
+    switch (action) {
+      case 'add':
+        this.profileForm.addInterest();
+        break;
+      case 'remove':
+        this.profileForm.removeInterest(index);
+        break;
+    }
   }
 }
