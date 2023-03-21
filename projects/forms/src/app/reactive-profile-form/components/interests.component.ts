@@ -8,6 +8,9 @@ import {
 import { ReactiveProfileForm } from '../helpers/reactive-profile-form.form';
 import { InterestComponent } from './interest.component';
 import { TranslateModule } from '../../translation/translate.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-interests',
@@ -17,6 +20,9 @@ import { TranslateModule } from '../../translation/translate.module';
     InterestComponent,
     ReactiveFormsModule,
     TranslateModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
   ],
   styles: [
     `
@@ -24,6 +30,10 @@ import { TranslateModule } from '../../translation/translate.module';
         display: flex;
         gap: 0.5rem;
         flex-direction: column;
+      }
+      .app-interests-header {
+        display: flex;
+        gap: 1rem;
       }
     `,
   ],
@@ -36,7 +46,19 @@ import { TranslateModule } from '../../translation/translate.module';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div formArrayName="interests">
-      <h2>{{'interests' | translate | titlecase}}</h2>
+      <div class="app-interests-header">
+        <h2>{{'interests' | translate | titlecase}}</h2>
+        <button
+          *ngIf="!profileForm.interestsArray.length"
+          mat-mini-fab
+          color="primary"
+          [matTooltip]="'addInterest' | translate"
+          [attr.aria-label]="'addInterest' | translate"
+          (click)="profileForm.addInterest()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
       <div class="app-interests-list">
       <app-interest
           *ngFor="let interestGroup of profileForm.interestsArray.controls; index as index"
