@@ -33,9 +33,30 @@ export class ReactiveProfileForm extends FormGroup {
     });
   }
 
-  addInterest(): void {
-    const control = formBuilder.control('');
-    this.interestsArray.push(control);
+  addInterest(interest?: Interest): void {
+    this.interestsArray.push(new InterestGroup(interest));
+  }
+
+  removeInterest(index: number): void {
+    this.interestsArray.removeAt(index);
+  }
+}
+
+export class InterestGroup extends FormGroup {
+  nameControl!: FormControlExtended;
+
+  constructor(interest?: Interest) {
+    super(InterestGroup.buildForm().controls);
+    this.nameControl = this.get('name') as FormControlExtended;
+    this.patchValue(interest ?? {});
+  }
+
+  static buildForm(): FormGroup<{
+    [Name in keyof Interest]: any;
+  }> {
+    return formBuilder.group({
+      name: '',
+    });
   }
 }
 
@@ -44,5 +65,9 @@ export interface ReactiveProfileFormKeys {
   lastName: string;
   country: string;
   phoneNumber: string;
-  interests: string[];
+  interests: Interest[];
+}
+
+export interface Interest {
+  name: string;
 }

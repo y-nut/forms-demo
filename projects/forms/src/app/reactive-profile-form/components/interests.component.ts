@@ -1,65 +1,43 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
-  ControlContainer,
-  FormControl,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { TextControlComponent } from '../../custom-form-elements/text-control/text-control.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { ReactiveProfileForm } from '../helpers/reactive-profile-form.form';
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormArray, FormArrayName, ReactiveFormsModule } from '@angular/forms';
+import { InterestGroup } from '../helpers/reactive-profile-form.form';
+import { InterestComponent } from './interest.component';
 
 @Component({
-  selector: 'app-interest',
+  selector: 'app-interests',
   standalone: true,
-  imports: [
-    CommonModule,
-    TextControlComponent,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    ReactiveFormsModule,
-  ],
-  template: `
-    <mat-card>
-      <mat-card-content class="app-interest-card-content">
-        <app-text-control [formControl]="control" label="interest"/>
-        <button
-          type="button"
-          mat-icon-button
-          color="primary"
-          (click)="reactiveForm.addInterest()"
-        >
-          <mat-icon inline>add</mat-icon>
-        </button>
-      </mat-card-content>
-    </mat-card>
-  `,
+  imports: [CommonModule, InterestComponent, ReactiveFormsModule],
   styles: [
     `
-      .app-interest-card-content {
+      .app-interests-list {
         display: flex;
         gap: 0.5rem;
-        align-items: center;
+        flex-direction: column;
       }
     `,
   ],
+  host: {
+    class: 'app-interests-list',
+  },
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <app-interest
+      *ngFor="let interest of interestsArray.controls; index as index"
+      [index]="index"
+    >
+    </app-interest>
+  `,
 })
-export class InterestComponent {
-  @Input() index = 0;
+export class InterestsComponent {
+  constructor(private formArray: FormArrayName) {}
 
-  constructor(private controlContainer: ControlContainer) {}
-
-  get reactiveForm(): ReactiveProfileForm {
-    return this.controlContainer.control as ReactiveProfileForm;
-  }
-
-  get control(): FormControl {
-    return this.reactiveForm.interestsArray.controls.at(
-      this.index
-    ) as FormControl;
+  get interestsArray(): FormArray<InterestGroup> {
+    return this.formArray.control as FormArray<InterestGroup>;
   }
 }

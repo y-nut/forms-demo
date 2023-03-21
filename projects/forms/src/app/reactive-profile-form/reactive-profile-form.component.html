@@ -29,8 +29,10 @@
       [maxLength]="profileForm.phoneNumberControl.maxLength"
     />
 
-    <h2>Interests</h2>
-    <app-interest *ngFor="let interest of profileForm.interestsArray.controls; let i = index" [index]="i"></app-interest>
+    <div formArrayName="interests">
+      <h2>Interests</h2>
+      <app-interests/>
+    </div>
 
   </fieldset>
 

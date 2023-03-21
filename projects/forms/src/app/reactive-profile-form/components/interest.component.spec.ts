@@ -1,4 +1,3 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormArray,
@@ -12,20 +11,14 @@ import {
   ReactiveProfileForm,
 } from '../helpers/reactive-profile-form.form';
 import { InterestComponent } from './interest.component';
-import { InterestsComponent } from './interests.component';
 
-describe('InterestsComponent', () => {
-  let component: InterestsComponent;
-  let fixture: ComponentFixture<InterestsComponent>;
+describe('InterestComponent', () => {
+  let component: InterestComponent;
+  let fixture: ComponentFixture<InterestComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        InterestComponent,
-        InterestsComponent,
-        ReactiveFormsModule,
-        NoopAnimationsModule,
-      ],
+      imports: [InterestComponent, NoopAnimationsModule, ReactiveFormsModule],
       providers: [
         {
           provide: FormArrayName,
@@ -44,10 +37,9 @@ describe('InterestsComponent', () => {
           },
         },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(InterestsComponent);
+    fixture = TestBed.createComponent(InterestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

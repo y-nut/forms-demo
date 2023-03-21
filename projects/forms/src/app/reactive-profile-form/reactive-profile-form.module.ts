@@ -8,7 +8,8 @@ import { SelectControlComponent } from '../custom-form-elements/select-control/s
 import { TextControlComponent } from '../custom-form-elements/text-control/text-control.component';
 import { PhoneNumberControlComponent } from '../custom-form-elements/phone-number-control/phone-number-control.component';
 import { TranslateModule } from '../translation/translate.module';
-import { InterestComponent } from './components/interests.component';
+import { InterestsComponent } from './components/interests.component';
+import { InterestComponent } from './components/interest.component';
 
 @NgModule({
   declarations: [ReactiveProfileFormComponent],
@@ -19,6 +20,7 @@ import { InterestComponent } from './components/interests.component';
     TextControlComponent,
     PhoneNumberControlComponent,
     ReactiveProfileFormRoutingModule,
+    InterestsComponent,
     InterestComponent,
     TranslateModule,
     MatSlideToggleModule,
