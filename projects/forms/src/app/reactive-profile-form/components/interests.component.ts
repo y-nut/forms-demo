@@ -60,9 +60,9 @@ import { MatIconModule } from '@angular/material/icon';
         </button>
       </div>
       <div class="app-interests-list">
-      <app-interest
-          *ngFor="let interestGroup of profileForm.interestsArray.controls; index as index"
-          [formGroupName]="index"/>
+        <app-interest
+            *ngFor="let interestGroup of profileForm.interestsArray.controls; index as index"
+            [formGroupName]="index"/>
       </div>
 
     </div>

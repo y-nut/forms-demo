@@ -8,13 +8,11 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  InterestGroup,
-  ReactiveProfileForm,
-} from '../helpers/reactive-profile-form.form';
+import { ReactiveProfileForm } from '../helpers/reactive-profile-form.form';
 import { TextControlComponent } from '../../custom-form-elements/text-control/text-control.component';
 import { TranslateModule } from '../../translation/translate.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { InterestGroup } from './interest.form';
 
 @Component({
   selector: 'app-interest',
