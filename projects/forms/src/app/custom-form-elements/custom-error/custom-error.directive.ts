@@ -27,6 +27,12 @@ export class CustomErrorDirective implements OnChanges {
           case 'pattern' in validationErrors:
             this.spanElement.textContent = 'Invalid pattern';
             break;
+          case 'minlength' in validationErrors:
+            this.spanElement.textContent = `Minimum length is ${validationErrors['minlength'].requiredLength}`;
+            break;
+          case 'maxlength' in validationErrors:
+            this.spanElement.textContent = `Maximum length is ${validationErrors['maxlength'].requiredLength}`;
+            break;
           default:
             this.spanElement.textContent = 'Invalid value';
             break;

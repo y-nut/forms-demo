@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormArray,
-  FormArrayName,
   FormGroupDirective,
+  FormGroupName,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -43,7 +42,7 @@ import { TextControlComponent } from '../../custom-form-elements/text-control/te
             type="button"
             mat-icon-button
             color="warn"
-            (click)="profileForm.removeInterest(index)"
+            (click)="removeInterest()"
           >
             <mat-icon inline>delete</mat-icon>
           </button>
@@ -63,21 +62,20 @@ import { TextControlComponent } from '../../custom-form-elements/text-control/te
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InterestComponent {
-  @Input() index = 0;
   constructor(
-    private formArray: FormArrayName,
-    private formGroupDirective: FormGroupDirective
+    private formGroupDirective: FormGroupDirective,
+    private formGroupName: FormGroupName
   ) {}
 
   get profileForm(): ReactiveProfileForm {
     return this.formGroupDirective.form as ReactiveProfileForm;
   }
 
-  get interestsArray(): FormArray<InterestGroup> {
-    return this.formArray.control;
+  get interestGroup(): InterestGroup {
+    return this.formGroupName.control as InterestGroup;
   }
 
-  get interestGroup(): InterestGroup {
-    return this.interestsArray.at(this.index);
+  removeInterest(): void {
+    this.profileForm.removeInterest(this.formGroupName.name as number);
   }
 }

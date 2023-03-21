@@ -7,7 +7,7 @@ export class ReactiveProfileForm extends FormGroup {
   phoneNumberControl!: FormControlExtended;
   firstNameControl!: FormControlExtended;
   lastNameControl!: FormControlExtended;
-  interestsArray!: FormArray;
+  interestsArray!: FormArray<InterestGroup>;
 
   constructor(reactiveProfile?: ReactiveProfileFormKeys) {
     super(ReactiveProfileForm.buildForm().controls);
@@ -16,7 +16,7 @@ export class ReactiveProfileForm extends FormGroup {
     this.phoneNumberControl = this.get('phoneNumber') as FormControlExtended;
     this.firstNameControl = this.get('firstName') as FormControlExtended;
     this.lastNameControl = this.get('lastName') as FormControlExtended;
-    this.interestsArray = this.get('interests') as FormArray;
+    this.interestsArray = this.get('interests') as FormArray<InterestGroup>;
 
     this.addInterest();
   }

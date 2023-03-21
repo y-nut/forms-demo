@@ -7,6 +7,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BaseControlDirective } from '../base-control.directive';
+import { CustomErrorComponent } from '../custom-error/custom-error.component';
 
 @Component({
   selector: 'app-date-picker-control',
@@ -22,6 +23,7 @@ import { BaseControlDirective } from '../base-control.directive';
     ReactiveFormsModule,
     MatButtonModule,
     CommonModule,
+    CustomErrorComponent,
   ],
 })
 export class DatePickerComponent extends BaseControlDirective {

@@ -9,7 +9,8 @@
       <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
     </mat-datepicker-actions>
   </mat-datepicker>
-  <mat-error *ngIf="datePickerControl.invalid">
-    {{ datePickerControl.errors | json }}
+  <mat-hint>{{ hint }}</mat-hint>
+  <mat-error>
+    <app-custom-error/>
   </mat-error>
 </mat-form-field>

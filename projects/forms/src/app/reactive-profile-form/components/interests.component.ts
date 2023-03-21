@@ -4,8 +4,16 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormArrayName, ReactiveFormsModule } from '@angular/forms';
-import { InterestGroup } from '../helpers/reactive-profile-form.form';
+import {
+  ControlContainer,
+  FormArray,
+  FormGroupDirective,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  InterestGroup,
+  ReactiveProfileForm,
+} from '../helpers/reactive-profile-form.form';
 import { InterestComponent } from './interest.component';
 
 @Component({
@@ -24,20 +32,31 @@ import { InterestComponent } from './interest.component';
   host: {
     class: 'app-interests-list',
   },
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useExisting: FormGroupDirective,
+    },
+  ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <app-interest
-      *ngFor="let interest of interestsArray.controls; index as index"
-      [index]="index"
-    >
-    </app-interest>
+    <div formArrayName="interests">
+      <h2>Interests</h2>
+      <app-interest
+          *ngFor="let interestGroup of interestsArray.controls; index as index"
+          [formGroupName]="index"/>
+    </div>
   `,
 })
 export class InterestsComponent {
-  constructor(private formArray: FormArrayName) {}
+  constructor(private controlContainer: ControlContainer) {}
+
+  get profileForm(): ReactiveProfileForm {
+    return this.controlContainer.control as ReactiveProfileForm;
+  }
 
   get interestsArray(): FormArray<InterestGroup> {
-    return this.formArray.control as FormArray<InterestGroup>;
+    return this.profileForm.interestsArray;
   }
 }

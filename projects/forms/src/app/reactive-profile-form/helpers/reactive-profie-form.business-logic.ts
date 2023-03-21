@@ -10,6 +10,10 @@ export class ReactiveProfileFormBusinessLogic {
     destroy$: Subject<void>
   ) {
     ReactiveProfileFormBusinessLogic.handleCountryChange(profileForm, destroy$);
+
+    const nameValidator = [Validators.minLength(2), Validators.maxLength(10)];
+    profileForm.firstNameControl.setValidators(nameValidator);
+    profileForm.lastNameControl.setValidators(nameValidator);
   }
 
   private static handleCountryChange(
@@ -32,16 +36,12 @@ export class ReactiveProfileFormBusinessLogic {
             profileForm.phoneNumberControl.setValidators([
               Validators.required,
               Validators.pattern(phoneNumberRegex.US.regex),
-              Validators.minLength(phoneNumberRegex.US.length),
-              Validators.maxLength(phoneNumberRegex.US.length),
             ]);
             break;
           case CountryCode.CL:
             profileForm.phoneNumberControl.setValidators([
               Validators.required,
               Validators.pattern(phoneNumberRegex.CL.regex),
-              Validators.minLength(phoneNumberRegex.CL.length),
-              Validators.maxLength(phoneNumberRegex.CL.length),
             ]);
             break;
         }
