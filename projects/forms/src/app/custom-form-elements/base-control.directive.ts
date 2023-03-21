@@ -38,7 +38,10 @@ export class BaseControlDirective implements ControlValueAccessor {
   get control(): FormControl {
     if (!this._setControl) {
       const formControlName = this.ngControl as FormControlName;
-      if (typeof formControlName.name === 'string' && this.formGroupDirective) {
+      if (
+        typeof formControlName?.name === 'string' &&
+        this.formGroupDirective
+      ) {
         this._control = this.formGroupDirective.form.get(
           formControlName.name
         ) as FormControl;
