@@ -6,7 +6,11 @@
       {{ 'myProfile' | translate }}
     </legend>
 
-    <app-select-control formControlName="country" [aria]="profileForm.countryControl.aria" [label]="profileForm.countryControl.label ?? ''" [options]="[
+    <app-select-control
+      formControlName="country"
+      [aria]="profileForm.countryControl.aria"
+      [label]="profileForm.countryControl.label"
+      [options]="[
       {
         label: ('countries.'+CountryCode.US | translate) + '',
         value: CountryCode.US
@@ -17,14 +21,17 @@
       }
     ]"/>
 
-    <app-text-control formControlName="displayName" [aria]="profileForm.displayNameControl.aria"  [label]="profileForm.displayNameControl.label ?? ''" />
+    <app-text-control
+      formControlName="displayName"
+      [aria]="profileForm.displayNameControl.aria"
+      [label]="profileForm.displayNameControl.label" />
 
 
     <app-phone-number-control
       formControlName="phoneNumber"
       [aria]="profileForm.phoneNumberControl.aria"
-      [label]="profileForm.phoneNumberControl.label ?? ''"
-      [hint]="profileForm.phoneNumberControl.hint ?? ''"
+      [label]="profileForm.phoneNumberControl.label"
+      [hint]="profileForm.phoneNumberControl.hint"
       [maxLength]="profileForm.phoneNumberControl.maxLength"
     />
 

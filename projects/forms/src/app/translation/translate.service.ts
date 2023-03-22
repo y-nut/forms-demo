@@ -51,12 +51,12 @@ export class TranslateService implements OnDestroy {
   instant(key: string): string {
     if (this._currentLanguage in this._languageFile) {
       if (has(this._languageFile[this._currentLanguage], key)) {
-        return get(this._languageFile[this._currentLanguage], key) ?? '';
+        return get(this._languageFile[this._currentLanguage], key);
       }
     }
     if (this._defaultLanguage in this._languageFile) {
       if (has(this._languageFile[this._defaultLanguage], key)) {
-        return get(this._languageFile[this._defaultLanguage], key) ?? '';
+        return get(this._languageFile[this._defaultLanguage], key);
       }
     }
 
