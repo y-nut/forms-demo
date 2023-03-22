@@ -20,6 +20,7 @@ import { A11yModule } from '@angular/cdk/a11y';
         formControlName="name"
         required
         cdkFocusInitial
+        aria-label="Write your full name"
       />
 
       <div
