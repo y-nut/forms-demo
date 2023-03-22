@@ -17,11 +17,10 @@ export class ReactiveProfileFormBusinessLogic {
     this.handleCountryChange(profileForm, destroy$);
     profileForm.displayNameControl.minLength = 2;
     profileForm.displayNameControl.maxLength = 10;
-    const nameValidator = [
+    profileForm.displayNameControl.setValidators([
       Validators.minLength(profileForm.displayNameControl.minLength),
       Validators.maxLength(profileForm.displayNameControl.maxLength),
-    ];
-    profileForm.displayNameControl.setValidators(nameValidator);
+    ]);
   }
 
   private handleCountryChange(
