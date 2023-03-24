@@ -18,8 +18,13 @@ export class ReactiveProfileFormBusinessLogic {
     profileForm.displayNameControl.minLength = 2;
     profileForm.displayNameControl.maxLength = 10;
     profileForm.displayNameControl.setValidators([
+      Validators.required,
       Validators.minLength(profileForm.displayNameControl.minLength),
       Validators.maxLength(profileForm.displayNameControl.maxLength),
+    ]);
+    profileForm.interestsArray.setValidators([
+      Validators.required,
+      Validators.minLength(1),
     ]);
   }
 

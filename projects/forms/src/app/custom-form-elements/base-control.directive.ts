@@ -18,7 +18,7 @@ export class BaseControlDirective implements ControlValueAccessor {
     this._label = label;
   }
   get label(): string {
-    return this._label ?? this.control.label;
+    return this._label ? this._label : this.control.label ?? '';
   }
   private _label = '';
   @Input()
@@ -26,7 +26,7 @@ export class BaseControlDirective implements ControlValueAccessor {
     this._hint = hint;
   }
   get hint(): string {
-    return this._hint ?? this.control.hint;
+    return this._hint ? this._hint : this.control.hint ?? '';
   }
   private _hint = '';
   @Input()
@@ -34,7 +34,7 @@ export class BaseControlDirective implements ControlValueAccessor {
     this._aria = aria;
   }
   get aria(): Record<string, string> {
-    return this._aria ?? this.control.aria;
+    return this._aria ? this._aria : this.control.aria ?? {};
   }
   private _aria = {};
 
