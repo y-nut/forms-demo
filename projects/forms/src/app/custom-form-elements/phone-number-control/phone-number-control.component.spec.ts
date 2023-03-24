@@ -5,6 +5,7 @@ import { PhoneNumberControlComponent } from './phone-number-control.component';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { runOnPushChangeDetection } from '../../testing/on-push-change-detection.helper';
+import { TranslateModule } from '../../translation/translate.module';
 
 describe('PhoneNumberControlComponent', () => {
   let component: PhoneNumberControlComponent;
@@ -13,7 +14,14 @@ describe('PhoneNumberControlComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PhoneNumberControlComponent, NoopAnimationsModule],
+      imports: [
+        PhoneNumberControlComponent,
+        NoopAnimationsModule,
+        TranslateModule.forRoot({
+          currentLanguage: 'en',
+          defaultLanguage: 'en',
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PhoneNumberControlComponent);

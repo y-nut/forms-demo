@@ -13,7 +13,7 @@ describe('It should verify that business rules are correctly applied', () => {
       const http = new HttpClient(<any>{
         handle() {},
       });
-      return new TranslateService(http);
+      return new TranslateService();
     },
   };
 

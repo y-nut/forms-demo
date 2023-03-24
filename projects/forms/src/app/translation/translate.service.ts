@@ -23,7 +23,7 @@ export class TranslateService implements OnDestroy {
     .asObservable()
     .pipe(distinctUntilChanged());
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.changeLanguage$.pipe(takeUntil(this._destroy$)).subscribe(() => {
       this._currentLanguageFile$.next(
         this._languageFile[this._currentLanguage]
@@ -84,8 +84,9 @@ export class TranslateService implements OnDestroy {
       return Promise.resolve(true);
     }
     const url = `assets/locale/messages.${language}.json`;
-    return firstValueFrom(this.http.get<TranslationFile>(url))
-      .then((data: TranslationFile) => {
+    return fetch(url)
+      .then(async (response) => {
+        const data: TranslationFile = await response.json();
         this._languageFile[language] = data.translations;
         return true;
       })
