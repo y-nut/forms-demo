@@ -1,10 +1,21 @@
-import { Directive, Injector, Input, Optional, Self } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Directive,
+  Injector,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Self,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControlName,
   FormGroupDirective,
   NgControl,
 } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
+import { TranslateService } from '../translation/translate.service';
 import { FormControlExtended } from './form-control-extended.class';
 
 @Directive({
@@ -12,9 +23,13 @@ import { FormControlExtended } from './form-control-extended.class';
     '(blue)': 'onTouch()',
   },
 })
-export class BaseControlDirective implements ControlValueAccessor {
+export class BaseControlDirective
+  implements ControlValueAccessor, OnInit, OnDestroy
+{
+  private destroy$ = new Subject();
   @Input()
   set label(label: string) {
+    debugger;
     this._label = label;
   }
   get label(): string {
@@ -50,6 +65,27 @@ export class BaseControlDirective implements ControlValueAccessor {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
+  }
+
+  ngOnInit(): void {
+    this.translateService.currentLanguageFile$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.changeDetectorRef.markForCheck();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(null);
+    this.destroy$.complete();
+  }
+
+  get changeDetectorRef(): ChangeDetectorRef {
+    return this.injector.get(ChangeDetectorRef);
+  }
+
+  get translateService(): TranslateService {
+    return this.injector.get(TranslateService);
   }
 
   get formGroupDirective(): FormGroupDirective | undefined {

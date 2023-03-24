@@ -15,6 +15,13 @@
     "countries": {
       "US":"United States",
       "CL": "Chile"
+    },
+    "fieldError": {
+      "required": "This field is required",
+      "minlength": "Minimum length is {minlength}",
+      "maxlength": "Maximum length is {maxlength}",
+      "pattern": "Invalid pattern",
+      "invalid":"Invalid value"
     }
   }
 }

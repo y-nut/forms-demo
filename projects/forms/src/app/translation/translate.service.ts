@@ -48,19 +48,35 @@ export class TranslateService implements OnDestroy {
     });
   }
 
-  instant(key: string): string {
+  instant(key: string, opts?: Record<string, string>): string {
+    let translation = '';
     if (this._currentLanguage in this._languageFile) {
       if (has(this._languageFile[this._currentLanguage], key)) {
-        return get(this._languageFile[this._currentLanguage], key);
+        translation = get(this._languageFile[this._currentLanguage], key);
       }
     }
-    if (this._defaultLanguage in this._languageFile) {
+    if (!translation && this._defaultLanguage in this._languageFile) {
       if (has(this._languageFile[this._defaultLanguage], key)) {
-        return get(this._languageFile[this._defaultLanguage], key);
+        translation = get(this._languageFile[this._defaultLanguage], key);
       }
+    }
+    if (translation && opts) {
+      Object.keys(opts).forEach((key) => {
+        const [indexOpen, index, indexClose] = [
+          translation.indexOf(`{`),
+          translation.indexOf(key),
+          translation.indexOf(`}`),
+        ];
+        if (indexOpen !== -1 && index !== -1 && indexClose !== -1) {
+          translation = translation.replace(
+            translation.substring(indexOpen, indexClose + 1),
+            opts[key]
+          );
+        }
+      });
     }
 
-    return key;
+    return translation;
   }
 
   loadTranslations(language: string): Promise<boolean> {

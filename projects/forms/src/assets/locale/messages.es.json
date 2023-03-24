@@ -15,6 +15,13 @@
     "countries": {
       "US":"Estados Unidos",
       "CL"  : "Chile"
+    },
+    "fieldError": {
+      "required": "El campo es requerido",
+      "minlength": "Minimo {minlength} caracteres",
+      "maxlength": "Maximumo {maxlength} caracteres",
+      "pattern": "patron invalido",
+      "invalid":"valor invalido"
     }
   }
 }
