@@ -41,13 +41,16 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/forms/src/favicon.ico",
-              "projects/forms/src/assets"
+              "projects/forms/src/assets",
+              "projects/forms/src/manifest.webmanifest"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "projects/forms/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "projects/forms/ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -105,7 +108,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/forms/src/favicon.ico",
-              "projects/forms/src/assets"
+              "projects/forms/src/assets",
+              "projects/forms/src/manifest.webmanifest"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
