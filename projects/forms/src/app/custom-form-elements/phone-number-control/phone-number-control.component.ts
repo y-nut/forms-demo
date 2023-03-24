@@ -12,7 +12,7 @@ import { CustomErrorComponent } from '../custom-error/custom-error.component';
     <mat-form-field>
       <mat-label>{{ label }}</mat-label>
       <input
-        [attr.aria-label]="aria?.['label']"
+        [attr.aria-label]="aria['label']"
         [attr.minlength]="minLength"
         [attr.maxlength]="maxLength"
         [formControl]="phoneControl"

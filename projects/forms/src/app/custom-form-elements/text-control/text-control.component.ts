@@ -7,20 +7,6 @@ import { CustomErrorComponent } from '../custom-error/custom-error.component';
 
 @Component({
   selector: 'app-text-control',
-  template: `
-    <mat-form-field>
-      <mat-label>{{ label }}</mat-label>
-      <input
-        [attr.aria-label]="aria?.['label']"
-        [formControl]="textControl"
-        matInput
-      />
-      <mat-hint>{{ hint }}</mat-hint>
-      <mat-error>
-        <app-custom-error/>
-      </mat-error>
-    </mat-form-field>
-  `,
   styleUrls: ['./text-control.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
@@ -30,6 +16,20 @@ import { CustomErrorComponent } from '../custom-error/custom-error.component';
     ReactiveFormsModule,
     CustomErrorComponent,
   ],
+  template: `
+    <mat-form-field>
+      <mat-label>{{ label }}</mat-label>
+      <input
+        [attr.aria-label]="aria['label']"
+        [formControl]="textControl"
+        matInput
+      />
+      <mat-hint>{{ hint }}</mat-hint>
+      <mat-error>
+        <app-custom-error/>
+      </mat-error>
+    </mat-form-field>
+  `,
 })
 export class TextControlComponent extends BaseControlDirective {
   get textControl(): FormControl {

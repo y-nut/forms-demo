@@ -1,11 +1,11 @@
 import { Directive, Injector, Input, Optional, Self } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormControl,
   FormControlName,
   FormGroupDirective,
   NgControl,
 } from '@angular/forms';
+import { FormControlExtended } from './form-control-extended.class';
 
 @Directive({
   host: {
@@ -13,13 +13,34 @@ import {
   },
 })
 export class BaseControlDirective implements ControlValueAccessor {
-  @Input() label: string | undefined = '';
-  @Input() hint: string | undefined = '';
-  @Input() aria: Record<string, string> | undefined;
+  @Input()
+  set label(label: string) {
+    this._label = label;
+  }
+  get label(): string {
+    return this._label ?? this.control.label;
+  }
+  private _label = '';
+  @Input()
+  set hint(hint: string) {
+    this._hint = hint;
+  }
+  get hint(): string {
+    return this._hint ?? this.control.hint;
+  }
+  private _hint = '';
+  @Input()
+  set aria(aria: Record<string, string>) {
+    this._aria = aria;
+  }
+  get aria(): Record<string, string> {
+    return this._aria ?? this.control.aria;
+  }
+  private _aria = {};
 
   onChange: any = () => {};
   onTouch: any = () => {};
-  private _control = new FormControl();
+  private _control = new FormControlExtended();
   private _setControl = false;
 
   constructor(
@@ -35,7 +56,7 @@ export class BaseControlDirective implements ControlValueAccessor {
     return this.injector.get(FormGroupDirective);
   }
 
-  get control(): FormControl {
+  get control(): FormControlExtended {
     if (!this._setControl) {
       const formControlName = this.ngControl as FormControlName;
       if (
@@ -44,10 +65,10 @@ export class BaseControlDirective implements ControlValueAccessor {
       ) {
         this._control = this.formGroupDirective.form.get(
           formControlName.name
-        ) as FormControl;
+        ) as FormControlExtended;
         this._setControl = true;
       } else if (this.ngControl?.control) {
-        this._control = this.ngControl?.control as FormControl;
+        this._control = this.ngControl?.control as FormControlExtended;
         this._setControl = true;
       }
     }

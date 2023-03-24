@@ -1,5 +1,5 @@
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { FormControlExtended } from '../../custom-form-elements/select-control/select-control.control';
+import { FormControlExtended } from '../../custom-form-elements/form-control-extended.class';
 import { Interest, InterestGroup } from '../components/interest.form';
 
 const formBuilder = new FormBuilder();
@@ -10,8 +10,7 @@ export class ReactiveProfileForm extends FormGroup {
   interestsArray!: FormArray<InterestGroup>;
 
   constructor(reactiveProfile?: ReactiveProfileFormKeys) {
-    super(ReactiveProfileForm.buildForm().controls);
-    this.patchValue(reactiveProfile ?? {});
+    super(ReactiveProfileForm.buildForm(reactiveProfile).controls);
     this.countryControl = this.get('country') as FormControlExtended;
     this.phoneNumberControl = this.get('phoneNumber') as FormControlExtended;
     this.displayNameControl = this.get('displayName') as FormControlExtended;
@@ -20,15 +19,17 @@ export class ReactiveProfileForm extends FormGroup {
     this.addInterest();
   }
 
-  static buildForm(): FormGroup<{
+  static buildForm(reactiveProfile?: ReactiveProfileFormKeys): FormGroup<{
     [Name in keyof ReactiveProfileFormKeys]: any;
   }> {
-    return formBuilder.group({
+    const form = formBuilder.group({
       displayName: '',
       country: '',
       phoneNumber: '',
       interests: formBuilder.array([]),
     });
+    form.patchValue(reactiveProfile ?? {});
+    return form;
   }
 
   addInterest(interest?: Interest): void {
