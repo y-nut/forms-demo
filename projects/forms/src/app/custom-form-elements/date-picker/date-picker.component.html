@@ -1,6 +1,6 @@
 <mat-form-field >
   <mat-label>{{label}}</mat-label>
-  <input [attr.aria-label]="aria?.['label']" [formControl]="datePickerControl" matInput [matDatepicker]="datepicker">
+  <input [attr.aria-label]="aria['label']" [formControl]="datePickerControl" matInput [matDatepicker]="datepicker">
   <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
   <mat-datepicker #datepicker>
     <mat-datepicker-actions>
