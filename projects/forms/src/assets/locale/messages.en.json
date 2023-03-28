@@ -6,7 +6,7 @@
     "displayName": "Full name",
     "country": "Country",
     "phoneNumber": "Phone number",
-    "yourDisplayName": "Your full name",
+    "yourDisplayName": "Write your full name",
     "yourCountry": "Choose your country",
     "yourPhone": "Provide your phone number with country code",
     "interest":"Interest",

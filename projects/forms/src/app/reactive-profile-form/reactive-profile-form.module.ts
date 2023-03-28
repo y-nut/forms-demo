@@ -10,6 +10,7 @@ import { PhoneNumberControlComponent } from '../custom-form-elements/phone-numbe
 import { TranslateModule } from '../translation/translate.module';
 import { InterestsComponent } from './components/interests.component';
 import { InterestComponent } from './components/interest.component';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @NgModule({
   declarations: [ReactiveProfileFormComponent],
@@ -24,6 +25,7 @@ import { InterestComponent } from './components/interest.component';
     InterestComponent,
     TranslateModule,
     MatSlideToggleModule,
+    A11yModule,
   ],
 })
 export class ReactiveProfileFormModule {}

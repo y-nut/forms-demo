@@ -92,11 +92,21 @@ export class ReactiveProfileFormBusinessLogic {
     profileForm.countryControl.label = this.translate('country');
     profileForm.phoneNumberControl.label = this.translate('phoneNumber');
     profileForm.displayNameControl.aria = {
-      label: this.translate('yourFirstName'),
+      label: this.translate('yourDisplayName'),
     };
     profileForm.countryControl.aria = { label: this.translate('yourCountry') };
     profileForm.phoneNumberControl.aria = {
       label: this.translate('yourPhone'),
     };
+    profileForm.countryControl.options = [
+      {
+        label: this.translate('countries.' + CountryCode.US),
+        value: CountryCode.US,
+      },
+      {
+        label: this.translate('countries.' + CountryCode.CL),
+        value: CountryCode.CL,
+      },
+    ];
   }
 }

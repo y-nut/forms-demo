@@ -4,25 +4,11 @@
       {{ 'myProfile' | translate }}
     </legend>
 
-    <app-select-control
-      formControlName="country"
-      [options]="[
-      {
-        label: ('countries.'+CountryCode.US | translate),
-        value: CountryCode.US
-      },
-      {
-        label: ('countries.'+CountryCode.CL | translate),
-        value: CountryCode.CL
-      }
-    ]"/>
+    <app-select-control formControlName="country"/>
 
     <app-text-control formControlName="displayName"/>
 
-    <app-phone-number-control
-      formControlName="phoneNumber"
-      [maxLength]="profileForm.phoneNumberControl.maxLength"
-    />
+    <app-phone-number-control formControlName="phoneNumber"/>
 
     <app-interests/>
 

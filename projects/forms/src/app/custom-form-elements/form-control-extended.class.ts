@@ -6,4 +6,10 @@ export class FormControlExtended extends FormControl {
   maxLength?: number;
   minLength?: number;
   aria?: Record<string, string>;
+  options?: OptionSelect[];
+}
+
+export interface OptionSelect {
+  value: string;
+  label: string;
 }

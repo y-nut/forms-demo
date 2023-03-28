@@ -16,7 +16,10 @@ import {
 } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { TranslateService } from '../translation/translate.service';
-import { FormControlExtended } from './form-control-extended.class';
+import {
+  FormControlExtended,
+  OptionSelect,
+} from './form-control-extended.class';
 
 @Directive({
   host: {
@@ -29,7 +32,6 @@ export class BaseControlDirective
   private destroy$ = new Subject();
   @Input()
   set label(label: string) {
-    debugger;
     this._label = label;
   }
   get label(): string {
@@ -52,6 +54,30 @@ export class BaseControlDirective
     return this._aria ? this._aria : this.control.aria ?? {};
   }
   private _aria = {};
+  @Input()
+  set options(options: OptionSelect[]) {
+    this._options = options;
+  }
+  get options(): OptionSelect[] {
+    return this._options ? this._options : this.control.options ?? [];
+  }
+  private _options: OptionSelect[] = [];
+  @Input()
+  set minLength(minLength: unknown) {
+    this._minLength = minLength;
+  }
+  get minLength(): unknown {
+    return this._minLength ? this._minLength : this.control.minLength ?? [];
+  }
+  private _minLength: unknown;
+  @Input()
+  set maxLength(maxLength: unknown) {
+    this._maxLength = maxLength;
+  }
+  get maxLength(): unknown {
+    return this._maxLength ? this._maxLength : this.control.maxLength ?? [];
+  }
+  private _maxLength: unknown;
 
   onChange: any = () => {};
   onTouch: any = () => {};

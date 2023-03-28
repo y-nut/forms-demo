@@ -41,13 +41,13 @@ import { StringifyPipe } from '../../shared/pipes/stringify.pipe';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   viewProviders: [
     {
       provide: ControlContainer,
       useExisting: FormGroupDirective,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div formArrayName="interests">
       <div class="app-interests-header">
