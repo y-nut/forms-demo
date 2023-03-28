@@ -14,7 +14,7 @@ import { TranslateService } from './translate.service';
 })
 export class TranslatePipe implements PipeTransform, OnDestroy {
   private subscription = Subscription.EMPTY;
-  private value?: string | undefined;
+  private value = '';
 
   constructor(
     private translate: TranslateService,
