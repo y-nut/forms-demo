@@ -10,21 +10,12 @@ import { A11yModule } from '@angular/cdk/a11y';
   imports: [CommonModule, ReactiveFormsModule, A11yModule],
   template: `
     <h2>Reactive example form</h2>
-    <form *ngIf="name" [formGroup]="heroForm">
+    <form [formGroup]="heroForm">
       <label for="name">Name</label>
-
-      <input
-        type="text"
-        id="name"
-        class="form-control"
-        formControlName="name"
-        required
-        cdkFocusInitial
-        aria-label="Write your full name"
-      />
+      <input class="form-control" formControlName="name" />
 
       <div
-        *ngIf="name.invalid && (name.dirty || name.touched)"
+        *ngIf="name && name.invalid && (name.dirty || name.touched)"
         class="alert alert-danger"
       >
         <div *ngIf="name.errors?.['required']">Name is required.</div>

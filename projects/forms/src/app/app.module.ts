@@ -18,13 +18,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     TranslateModule.forRoot({
       currentLanguage: Language.ES,
       defaultLanguage: Language.ES,
-      // initialLoadLanguages: [Language.ES, Language.EN],
+      // initialLoadLanguages: [Language.ES, Language.EN], // Optional
     }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
   bootstrap: [AppComponent],

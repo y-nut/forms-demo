@@ -31,7 +31,7 @@ import { InterestGroup } from './interest.form';
     <ng-container [formGroup]="interestGroup">
       <mat-card>
         <mat-card-content class="app-interest-card-content">
-          <app-text-control [formControl]="interestGroup.nameControl" [label]="'interest' | translate"/>
+          <app-text-control formControlName="name" [label]="'interest' | translate"/>
           <button
             type="button"
             mat-icon-button
