@@ -11,8 +11,7 @@ import { CountryCode } from '../shared/enums/country-code.enum';
 })
 export class ReactiveProfileFormComponent implements OnDestroy, OnInit {
   private _destroy$ = new Subject<void>();
-  profileForm = new ReactiveProfileForm();
-  CountryCode = CountryCode;
+  readonly profileForm = new ReactiveProfileForm();
 
   constructor(private injector: Injector) {}
 
@@ -20,7 +19,6 @@ export class ReactiveProfileFormComponent implements OnDestroy, OnInit {
     const businessRules = new ReactiveProfileFormBusinessLogic(this.injector);
     businessRules.applyBusinessLogic(this.profileForm, this._destroy$);
   }
-
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();

@@ -27,6 +27,16 @@ import { InterestGroup } from './interest.form';
     TranslateModule,
     MatTooltipModule,
   ],
+  styles: [
+    `
+      .app-interest-card-content {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container [formGroup]="interestGroup">
       <mat-card>
@@ -56,16 +66,6 @@ import { InterestGroup } from './interest.form';
       </mat-card>
     </ng-container>
   `,
-  styles: [
-    `
-      .app-interest-card-content {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-      }
-    `,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InterestComponent {
   @Output() action = new EventEmitter<'add' | 'remove'>();

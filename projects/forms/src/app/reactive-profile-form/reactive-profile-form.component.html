@@ -13,9 +13,9 @@
     <app-interests/>
 
   </fieldset>
-
-  <mat-slide-toggle #toggle >See values</mat-slide-toggle>
-  <pre *ngIf="toggle.checked">
-    {{ profileForm.value | json }}
-  </pre>
  </form>
+
+ <mat-slide-toggle #toggle >See values</mat-slide-toggle>
+ <pre *ngIf="toggle.checked">
+   {{ profileForm.value | json }}
+ </pre>
