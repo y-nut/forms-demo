@@ -27,10 +27,10 @@ describe('It should verify that business rules are correctly applied', () => {
     const businessLogic = new ReactiveProfileFormBusinessLogic(injector);
     businessLogic.applyBusinessLogic(profileForm, destroy$);
 
-    profileForm.countryControl.setValue(CountryCode.US);
-    profileForm.phoneNumberControl.setValue('1234567890');
-    expect(profileForm.phoneNumberControl.invalid).toBe(true);
-    profileForm.phoneNumberControl.setValue('+1234567890');
-    expect(profileForm.phoneNumberControl.valid).toBe(true);
+    profileForm.controls.country.setValue(CountryCode.US);
+    profileForm.controls.phoneNumber.setValue('1234567890');
+    expect(profileForm.controls.phoneNumber.invalid).toBe(true);
+    profileForm.controls.phoneNumber.setValue('+1234567890');
+    expect(profileForm.controls.phoneNumber.valid).toBe(true);
   });
 });

@@ -8,7 +8,6 @@ import { PhoneNumberControlComponent } from '../custom-form-elements/phone-numbe
 import { SelectControlComponent } from '../custom-form-elements/select-control/select-control.component';
 import { TextControlComponent } from '../custom-form-elements/text-control/text-control.component';
 import { ReactiveProfileFormComponent } from './reactive-profile-form.component';
-import { ReactiveProfileForm } from './helpers/reactive-profile-form.form';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InterestsComponent } from './components/interests.component';
 
@@ -39,7 +38,6 @@ describe('ReactiveProfileFormComponent', () => {
 
     fixture = TestBed.createComponent(ReactiveProfileFormComponent);
     component = fixture.componentInstance;
-    component.profileForm = new ReactiveProfileForm();
     fixture.detectChanges();
   });
 

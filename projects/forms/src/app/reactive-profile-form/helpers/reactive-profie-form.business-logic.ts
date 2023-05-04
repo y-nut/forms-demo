@@ -15,14 +15,14 @@ export class ReactiveProfileFormBusinessLogic {
     destroy$: Subject<void>
   ) {
     this.handleCountryChange(profileForm, destroy$);
-    profileForm.displayNameControl.minLength = 2;
-    profileForm.displayNameControl.maxLength = 10;
-    profileForm.displayNameControl.setValidators([
+    profileForm.controls.displayName.minLength = 2;
+    profileForm.controls.displayName.maxLength = 10;
+    profileForm.controls.displayName.setValidators([
       Validators.required,
-      Validators.minLength(profileForm.displayNameControl.minLength),
-      Validators.maxLength(profileForm.displayNameControl.maxLength),
+      Validators.minLength(profileForm.controls.displayName.minLength),
+      Validators.maxLength(profileForm.controls.displayName.maxLength),
     ]);
-    profileForm.interestsArray.setValidators([
+    profileForm.controls.interests.setValidators([
       Validators.required,
       Validators.minLength(1),
     ]);
@@ -32,9 +32,9 @@ export class ReactiveProfileFormBusinessLogic {
     profileForm: ReactiveProfileForm,
     destroy$: Subject<void>
   ): void {
-    profileForm.countryControl.valueChanges
+    profileForm.controls.country.valueChanges
       .pipe(
-        startWith(profileForm.countryControl.value),
+        startWith(profileForm.controls.country.value),
         distinctUntilChanged(),
         takeUntil(destroy$),
         tap((countryCode) => {
@@ -50,26 +50,26 @@ export class ReactiveProfileFormBusinessLogic {
       )
       .subscribe((countryCode) => {
         // Validations
-        profileForm.phoneNumberControl.clearValidators();
-        profileForm.phoneNumberControl.reset('', { emitEvent: false });
-        profileForm.phoneNumberControl.hint = '';
+        profileForm.controls.phoneNumber.clearValidators();
+        profileForm.controls.phoneNumber.reset('', { emitEvent: false });
+        profileForm.controls.phoneNumber.hint = '';
         switch (countryCode) {
           case CountryCode.US:
-            profileForm.phoneNumberControl.setValidators([
+            profileForm.controls.phoneNumber.setValidators([
               Validators.required,
               Validators.pattern(phoneNumberRegex.US.regex),
             ]);
-            profileForm.phoneNumberControl.hint = '+1...';
+            profileForm.controls.phoneNumber.hint = '+1...';
             break;
           case CountryCode.CL:
-            profileForm.phoneNumberControl.setValidators([
+            profileForm.controls.phoneNumber.setValidators([
               Validators.required,
               Validators.pattern(phoneNumberRegex.CL.regex),
             ]);
-            profileForm.phoneNumberControl.hint = '+56...';
+            profileForm.controls.phoneNumber.hint = '+56...';
             break;
         }
-        profileForm.phoneNumberControl.updateValueAndValidity();
+        profileForm.controls.phoneNumber.updateValueAndValidity();
       });
 
     this.translateService.changeLanguage$
@@ -88,17 +88,19 @@ export class ReactiveProfileFormBusinessLogic {
   }
 
   private translateFields(profileForm: ReactiveProfileForm) {
-    profileForm.displayNameControl.label = this.translate('displayName');
-    profileForm.countryControl.label = this.translate('country');
-    profileForm.phoneNumberControl.label = this.translate('phoneNumber');
-    profileForm.displayNameControl.aria = {
+    profileForm.controls.displayName.label = this.translate('displayName');
+    profileForm.controls.country.label = this.translate('country');
+    profileForm.controls.phoneNumber.label = this.translate('phoneNumber');
+    profileForm.controls.displayName.aria = {
       label: this.translate('yourDisplayName'),
     };
-    profileForm.countryControl.aria = { label: this.translate('yourCountry') };
-    profileForm.phoneNumberControl.aria = {
+    profileForm.controls.country.aria = {
+      label: this.translate('yourCountry'),
+    };
+    profileForm.controls.phoneNumber.aria = {
       label: this.translate('yourPhone'),
     };
-    profileForm.countryControl.options = [
+    profileForm.controls.country.options = [
       {
         label: this.translate('countries.' + CountryCode.US),
         value: CountryCode.US,

@@ -51,9 +51,9 @@ import { StringifyPipe } from '../../shared/pipes/stringify.pipe';
   template: `
     <div formArrayName="interests">
       <div class="app-interests-header">
-        <h2>{{'interests' | translate | titlecase}}</h2>
+        <h2>{{ 'interests' | translate | titlecase }}</h2>
         <button
-          *ngIf="!profileForm.interestsArray.length"
+          *ngIf="!profileForm.controls.interests.length"
           mat-mini-fab
           color="primary"
           [matTooltip]="'addInterest' | translate"
@@ -64,18 +64,21 @@ import { StringifyPipe } from '../../shared/pipes/stringify.pipe';
         </button>
       </div>
 
-      <span class="mat-mdc-form-field-error"
-        [appCustomError]="profileForm.interestsArray.errors | stringify"
+      <span
+        class="mat-mdc-form-field-error"
+        [appCustomError]="profileForm.controls.interests.errors | stringify"
       ></span>
 
       <div class="app-interests-list">
         <app-interest
-          *ngFor="let interestGroup of profileForm.interestsArray.controls; index as index"
+          *ngFor="
+            let interestGroup of profileForm.controls.interests.controls;
+            index as index
+          "
           [formGroupName]="index"
           (action)="action($event, index)"
         />
       </div>
-
     </div>
   `,
 })

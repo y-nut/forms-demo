@@ -1,46 +1,27 @@
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { FormControlExtended } from '../../custom-form-elements/form-control-extended.class';
-import { Interest, InterestGroup } from '../components/interest.form';
+import { InterestGroup } from '../components/interest.form';
 
-const formBuilder = new FormBuilder();
 export class ReactiveProfileForm extends FormGroup {
-  countryControl!: FormControlExtended;
-  phoneNumberControl!: FormControlExtended;
-  displayNameControl!: FormControlExtended;
-  interestsArray!: FormArray<InterestGroup>;
-
-  constructor() {
-    super(ReactiveProfileForm.buildForm().controls);
-    this.countryControl = this.get('country') as FormControlExtended;
-    this.phoneNumberControl = this.get('phoneNumber') as FormControlExtended;
-    this.displayNameControl = this.get('displayName') as FormControlExtended;
-    this.interestsArray = this.get('interests') as FormArray<InterestGroup>;
+  constructor(
+    public override controls = ReactiveProfileForm.buildProfileForm().controls
+  ) {
+    super(controls);
   }
 
-  static buildForm(): FormGroup<{
-    [Name in keyof ReactiveProfileFormKeys]: any;
-  }> {
-    const form = formBuilder.group({
-      displayName: '',
-      country: '',
-      phoneNumber: '',
-      interests: formBuilder.array([]),
+  static buildProfileForm() {
+    return new FormGroup({
+      displayName: new FormControlExtended(''),
+      country: new FormControlExtended('', { nonNullable: true }),
+      phoneNumber: new FormControlExtended(''),
+      interests: new FormArray<InterestGroup>([]),
     });
-    return form;
   }
 
-  addInterest(interest?: Interest): void {
-    this.interestsArray.push(new InterestGroup(interest));
+  addInterest(): void {
+    this.controls.interests.push(new InterestGroup());
   }
-
   removeInterest(index: number): void {
-    this.interestsArray.removeAt(index);
+    this.controls.interests.removeAt(index);
   }
-}
-
-export interface ReactiveProfileFormKeys {
-  displayName: string;
-  country: string;
-  phoneNumber: string;
-  interests: Interest[];
 }
