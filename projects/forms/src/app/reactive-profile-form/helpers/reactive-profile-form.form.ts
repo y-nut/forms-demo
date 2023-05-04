@@ -12,7 +12,7 @@ export class ReactiveProfileForm extends FormGroup {
   static buildProfileForm() {
     return new FormGroup({
       displayName: new FormControlExtended(''),
-      country: new FormControlExtended('', { nonNullable: true }),
+      country: new FormControlExtended(''),
       phoneNumber: new FormControlExtended(''),
       interests: new FormArray<InterestGroup>([]),
     });
