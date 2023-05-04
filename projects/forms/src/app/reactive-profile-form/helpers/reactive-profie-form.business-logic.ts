@@ -8,13 +8,10 @@ import { TranslateService } from '../../translation/translate.service';
 import { ReactiveProfileForm } from './reactive-profile-form.form';
 
 export class ReactiveProfileFormBusinessLogic {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, private destroy$: Subject<void>) {}
 
-  applyBusinessLogic(
-    profileForm: ReactiveProfileForm,
-    destroy$: Subject<void>
-  ) {
-    this.handleCountryChange(profileForm, destroy$);
+  applyBusinessLogic(profileForm: ReactiveProfileForm) {
+    this.handleCountryChange(profileForm);
     profileForm.controls.displayName.minLength = 2;
     profileForm.controls.displayName.maxLength = 10;
     profileForm.controls.displayName.setValidators([
@@ -28,15 +25,12 @@ export class ReactiveProfileFormBusinessLogic {
     ]);
   }
 
-  private handleCountryChange(
-    profileForm: ReactiveProfileForm,
-    destroy$: Subject<void>
-  ): void {
+  private handleCountryChange(profileForm: ReactiveProfileForm): void {
     profileForm.controls.country.valueChanges
       .pipe(
         startWith(profileForm.controls.country.value),
         distinctUntilChanged(),
-        takeUntil(destroy$),
+        takeUntil(this.destroy$),
         tap((countryCode) => {
           switch (countryCode) {
             case CountryCode.US:
@@ -73,7 +67,7 @@ export class ReactiveProfileFormBusinessLogic {
       });
 
     this.translateService.changeLanguage$
-      .pipe(takeUntil(destroy$), startWith(''))
+      .pipe(takeUntil(this.destroy$), startWith(''))
       .subscribe(() => {
         this.translateFields(profileForm);
       });

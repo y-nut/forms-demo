@@ -15,8 +15,11 @@ export class ReactiveProfileFormComponent implements OnDestroy, OnInit {
   constructor(private injector: Injector) {}
 
   ngOnInit(): void {
-    const businessRules = new ReactiveProfileFormBusinessLogic(this.injector);
-    businessRules.applyBusinessLogic(this.profileForm, this._destroy$);
+    const businessRules = new ReactiveProfileFormBusinessLogic(
+      this.injector,
+      this._destroy$
+    );
+    businessRules.applyBusinessLogic(this.profileForm);
     this.profileForm.addInterest();
   }
   ngOnDestroy(): void {
