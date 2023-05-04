@@ -9,17 +9,15 @@ export class ReactiveProfileForm extends FormGroup {
   displayNameControl!: FormControlExtended;
   interestsArray!: FormArray<InterestGroup>;
 
-  constructor(reactiveProfile?: ReactiveProfileFormKeys) {
-    super(ReactiveProfileForm.buildForm(reactiveProfile).controls);
+  constructor() {
+    super(ReactiveProfileForm.buildForm().controls);
     this.countryControl = this.get('country') as FormControlExtended;
     this.phoneNumberControl = this.get('phoneNumber') as FormControlExtended;
     this.displayNameControl = this.get('displayName') as FormControlExtended;
     this.interestsArray = this.get('interests') as FormArray<InterestGroup>;
-
-    this.addInterest();
   }
 
-  static buildForm(reactiveProfile?: ReactiveProfileFormKeys): FormGroup<{
+  static buildForm(): FormGroup<{
     [Name in keyof ReactiveProfileFormKeys]: any;
   }> {
     const form = formBuilder.group({
@@ -28,7 +26,6 @@ export class ReactiveProfileForm extends FormGroup {
       phoneNumber: '',
       interests: formBuilder.array([]),
     });
-    form.patchValue(reactiveProfile ?? {});
     return form;
   }
 
