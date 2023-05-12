@@ -11,6 +11,7 @@ import { TranslateModule } from '../translation/translate.module';
 import { InterestsComponent } from './components/interests.component';
 import { InterestComponent } from './components/interest.component';
 import { A11yModule } from '@angular/cdk/a11y';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [ReactiveProfileFormComponent],
@@ -26,6 +27,7 @@ import { A11yModule } from '@angular/cdk/a11y';
     TranslateModule,
     MatSlideToggleModule,
     A11yModule,
+    MatButtonModule,
   ],
 })
 export class ReactiveProfileFormModule {}

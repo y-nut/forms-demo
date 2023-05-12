@@ -1,6 +1,7 @@
 import { FormArray, FormGroup } from '@angular/forms';
 import { FormControlExtended } from '../../custom-form-elements/form-control-extended.class';
 import { InterestGroup } from '../components/interest.form';
+import { CountryCode } from '../../shared/enums/country-code.enum';
 
 export class ReactiveProfileForm extends FormGroup {
   constructor(
@@ -11,9 +12,9 @@ export class ReactiveProfileForm extends FormGroup {
 
   static buildProfileForm() {
     return new FormGroup({
-      displayName: new FormControlExtended(''),
-      country: new FormControlExtended(''),
-      phoneNumber: new FormControlExtended(''),
+      displayName: new FormControlExtended('', { nonNullable: true }),
+      country: new FormControlExtended(CountryCode.US, { nonNullable: true }),
+      phoneNumber: new FormControlExtended('', { nonNullable: true }),
       interests: new FormArray<InterestGroup>([]),
     });
   }
