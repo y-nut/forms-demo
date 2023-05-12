@@ -22,6 +22,7 @@
       "maxlength": "Maximum length is {maxlength}",
       "pattern": "Invalid pattern",
       "invalid":"Invalid value"
-    }
+    },
+    "reset":"reset"
   }
 }

@@ -5,15 +5,15 @@
     </legend>
 
     <app-select-control formControlName="country"/>
-
     <app-text-control formControlName="displayName"/>
-
     <app-phone-number-control formControlName="phoneNumber"/>
-
     <app-interests/>
 
     <div class="app-ReactiveProfileForm-actions">
-      <button type="reset" mat-flat-button color="primary">Reset</button>
+      <button
+        type="reset"
+        mat-flat-button color="primary"
+      >{{'reset' | translate | titlecase}}</button>
     </div>
 
   </fieldset>
