@@ -39,10 +39,13 @@ export class ReactiveProfileForm extends FormGroup {
   removeInterest(index: number): void {
     this.controls.interests.removeAt(index);
   }
+  clearInterests(): void {
+    this.controls.interests.clear();
+  }
 
   override reset(): void {
     super.reset();
-    this.controls.interests.clear();
+    this.clearInterests();
     this.addInterest();
   }
 }
