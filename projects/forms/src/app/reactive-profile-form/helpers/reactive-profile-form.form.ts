@@ -3,6 +3,12 @@ import { FormControlExtended } from '../../custom-form-elements/form-control-ext
 import { InterestGroup } from '../components/interest.form';
 import { CountryCode } from '../../shared/enums/country-code.enum';
 
+export interface ReactiveProfileFormControls {
+  displayName: string;
+  country: CountryCode;
+  phoneNumber: string;
+  interests: { name: string }[];
+}
 export class ReactiveProfileForm extends FormGroup {
   constructor(
     public override controls = ReactiveProfileForm.buildProfileForm().controls
@@ -10,13 +16,21 @@ export class ReactiveProfileForm extends FormGroup {
     super(controls);
   }
 
-  static buildProfileForm() {
-    return new FormGroup({
+  static buildProfileForm(initialState?: ReactiveProfileFormControls) {
+    const form = new FormGroup({
       displayName: new FormControlExtended('', { nonNullable: true }),
       country: new FormControlExtended(CountryCode.US, { nonNullable: true }),
       phoneNumber: new FormControlExtended('', { nonNullable: true }),
       interests: new FormArray<InterestGroup>([]),
     });
+
+    form.patchValue(initialState ?? {});
+    initialState?.interests?.forEach((interest) => {
+      form.controls.interests.push(
+        new InterestGroup(InterestGroup.buildInterestForm(interest).controls)
+      );
+    });
+    return form;
   }
 
   addInterest(): void {
@@ -24,5 +38,11 @@ export class ReactiveProfileForm extends FormGroup {
   }
   removeInterest(index: number): void {
     this.controls.interests.removeAt(index);
+  }
+
+  override reset(): void {
+    super.reset();
+    this.controls.interests.clear();
+    this.addInterest();
   }
 }
