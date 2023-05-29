@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { distinctUntilChanged, firstValueFrom, Subject, takeUntil } from 'rxjs';
+import { distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { get, has } from 'lodash';
 
 interface TranslationFile {
