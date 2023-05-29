@@ -23,7 +23,7 @@ import {
 
 @Directive({
   host: {
-    '(blue)': 'onTouch()',
+    '(blur)': 'onTouch()',
   },
 })
 export class BaseControlDirective
