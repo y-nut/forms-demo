@@ -3,29 +3,30 @@ import { inject, Injector } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CountryCode } from '../../shared/enums/country-code.enum';
 import { TranslateService } from '../../translation/translate.service';
-import { ReactiveProfileFormBusinessLogic } from './reactive-profie-form.business-logic';
+import { ReactiveProfileFormBusinessLogicService } from './reactive-profie-form.business-logic';
 import { ReactiveProfileForm } from './reactive-profile-form.form';
+import { TestBed } from '@angular/core/testing';
+import { TranslateModule } from '../../translation/translate.module';
 
-describe('It should verify that business rules are correctly applied', () => {
-  const destroy$ = new Subject<void>();
-  let injector: Injector = {
-    get() {
-      const http = new HttpClient(<any>{
-        handle() {},
-      });
-      return new TranslateService();
-    },
-  };
+describe('ReactiveProfileFormBusinessLogicService', () => {
+  let service: ReactiveProfileFormBusinessLogicService;
 
-  afterAll(() => {
-    destroy$.next();
-    destroy$.complete();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot({
+          currentLanguage: 'en',
+          defaultLanguage: 'en',
+        }),
+      ],
+      providers: [ReactiveProfileFormBusinessLogicService],
+    });
+    service = TestBed.inject(ReactiveProfileFormBusinessLogicService);
   });
 
-  it('Country change', () => {
+  it('It should verify that business rules are correctly applied when country change', () => {
     const profileForm = new ReactiveProfileForm();
-    const businessLogic = new ReactiveProfileFormBusinessLogic(injector);
-    businessLogic.applyBusinessLogic(profileForm, destroy$);
+    service.applyBusinessLogic(profileForm).subscribe();
 
     profileForm.controls.country.setValue(CountryCode.US);
     profileForm.controls.phoneNumber.setValue('1234567890');
