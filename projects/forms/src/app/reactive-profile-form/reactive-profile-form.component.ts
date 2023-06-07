@@ -1,25 +1,27 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ReactiveProfileForm } from './helpers/reactive-profile-form.form';
-import { ReactiveProfileFormBusinessLogic } from './helpers/reactive-profie-form.business-logic';
+import { ReactiveProfileFormBusinessLogicService } from './helpers/reactive-profie-form.business-logic';
 
 @Component({
   selector: 'app-reactive-profile-form',
   templateUrl: './reactive-profile-form.component.html',
   styleUrls: ['./reactive-profile-form.component.scss'],
+  providers: [ReactiveProfileFormBusinessLogicService],
 })
 export class ReactiveProfileFormComponent implements OnDestroy, OnInit {
   private _destroy$ = new Subject<void>();
   readonly profileForm = new ReactiveProfileForm();
 
-  constructor(private injector: Injector) {}
+  constructor(
+    private reactiveProfileFormBusinessLogicService: ReactiveProfileFormBusinessLogicService
+  ) {}
 
   ngOnInit(): void {
-    const businessRules = new ReactiveProfileFormBusinessLogic(
-      this.injector,
-      this._destroy$
-    );
-    businessRules.applyBusinessLogic(this.profileForm);
+    this.reactiveProfileFormBusinessLogicService
+      .applyBusinessLogic(this.profileForm)
+      .pipe(takeUntil(this._destroy$))
+      .subscribe();
     this.profileForm.addInterest();
   }
   ngOnDestroy(): void {
