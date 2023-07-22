@@ -1,0 +1,37 @@
+.app-ProductList {
+  &-list {
+    display: grid;
+    gap: 1rem;
+    margin: auto;
+    width: fit-content;
+  }
+  &-header {
+    text-align: center;
+  }
+  &-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    &-desc {
+      max-width: 300px;
+      display: grid;
+    }
+
+    &-icon {
+      background-size: cover;
+      background-image: url('./../../assets/icons/discount-badge.png');
+    }
+
+    &-image {
+      margin: auto;
+      height: 200px;
+      padding: 1rem;
+    }
+
+    &-actions {
+      display: flex;
+      justify-content: space-between;
+      grid-column: 1 / span 2;
+    }
+  }
+}

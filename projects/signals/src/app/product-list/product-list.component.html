@@ -1,0 +1,41 @@
+<h2 class="app-ProductList-header">Paintings</h2>
+
+<div class="app-ProductList-list">
+  <ng-container *ngFor="let product of products()">
+    <mat-card class="app-ProductList-card mat-elevation-z4">
+
+        <div class="app-ProductList-card-desc">
+          <mat-card-header>
+            <div mat-card-avatar class="app-ProductList-card-icon"></div>
+            <mat-card-title>{{product.productName}}</mat-card-title>
+            <mat-card-subtitle>
+              {{product.productStock}} left!
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Alias repellat dolore eveniet molestias laudantium sequi, quia delectus quos.
+              Expedita, velit aliquid necessitatibus et fugit nulla rem facere eum debitis pariatur.
+            </p>
+            <p>
+              <strong>
+                Price {{product.productPrice | currency: 'USD':'symbol':'1.0-0'}}
+              </strong>
+            </p>
+          </mat-card-content>
+        </div>
+        <img mat-card-image [src]="product.productImage" class="app-ProductList-card-image">
+
+        <mat-card-actions class="app-ProductList-card-actions">
+          <button mat-flat-button color="primary" type="button" (click)="checkoutService.addProduct(product.productId, 1)">Add to basket</button>
+
+          <span *ngIf="basket.get(product.productId) as basketProduct">
+            <app-qty [productId]="product.productId"></app-qty>
+          </span>
+        </mat-card-actions>
+    </mat-card>
+
+  </ng-container>
+</div>
+
