@@ -1,11 +1,11 @@
-<ng-container *ngIf="productIdSignal() as productId">
-  <div *ngIf="basketItem() as item" class="app-Qty">
+<ng-container *ngIf="productId !== undefined && basket.has(productId)">
+  <div *ngIf="basket.get(productId) as item" class="app-Qty">
     <button mat-mini-fab color="accent" (click)="checkoutService.addProduct(productId, -1)">
       <mat-icon>remove</mat-icon>
     </button>
 
-    <strong>
-      {{ item.qty }}
+    <strong >
+      {{ item().qty }}
     </strong>
 
     <button mat-mini-fab color="primary" (click)="checkoutService.addProduct(productId, 1)">
@@ -13,5 +13,3 @@
     </button>
   </div>
 </ng-container>
-
-
