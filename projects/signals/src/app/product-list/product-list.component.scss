@@ -29,9 +29,22 @@
       display: grid;
     }
 
+    &-price {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    &-prevPrice {
+      text-decoration: line-through;
+      color: #999;
+    }
+
     &-icon {
       background-size: cover;
       background-image: url('./../../assets/icons/discount-badge.png');
+      aspect-ratio: 1;
+      height: 1rem;
     }
 
     &-image {
