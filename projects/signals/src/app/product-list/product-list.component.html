@@ -1,5 +1,15 @@
 <h2 class="app-ProductList-header">Paintings</h2>
 
+<div class="app-ProductList-promo">
+  <span>
+    Apply promo code
+  </span>
+
+  <input type="text" #promoCode class="app-ProductList-promo-promoCodeInput">
+
+  <button mat-flat-button color="primary" type="button" (click)="checkoutService.applyPromoCode(!!promoCode.value)">Apply</button>
+</div>
+
 <div class="app-ProductList-list">
   <ng-container *ngFor="let product of products()">
     <mat-card class="app-ProductList-card mat-elevation-z4">
@@ -20,7 +30,7 @@
             </p>
             <p>
               <strong>
-                Price {{product.productPrice | currency: 'USD':'symbol':'1.0-0'}}
+                Price {{product.productSalePrice | currency: 'USD':'symbol':'1.0-0'}}
               </strong>
             </p>
           </mat-card-content>

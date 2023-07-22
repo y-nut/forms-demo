@@ -8,6 +8,18 @@
   &-header {
     text-align: center;
   }
+  &-promo {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: fit-content;
+    margin: 1rem auto;
+    align-items: center;
+    &-promoCodeInput {
+      text-transform: uppercase;
+      padding: 0.5rem;
+    }
+  }
   &-card {
     display: grid;
     grid-template-columns: 1fr auto;
