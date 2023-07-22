@@ -1,0 +1,25 @@
+<mat-card *ngIf="basket.size" class="app-Basket-card">
+  <mat-card-header>
+    <mat-card-title>Shopping Basket</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="app-Basket-actions">
+
+    <span>
+      <strong>
+        Total:
+        {{
+          totalNormalPrice() | currency: 'USD':'symbol':'1.0-0'
+        }}
+      </strong>
+
+    </span>
+
+    <button mat-flat-button color="primary" type="button" class="app-Basket-checkoutButton">Checkout</button>
+
+  </mat-card-actions>
+</mat-card>

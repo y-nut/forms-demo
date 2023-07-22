@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=3800",
+    "start": "npm run start:signals",
+    "start:signals": "ng serve --port=3800 --project=signals --configuration development",
+    "start:forms": "ng serve --port=3800 --project=forms --configuration development",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

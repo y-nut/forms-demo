@@ -1,0 +1,11 @@
+.app-Basket {
+  &-card {
+    position: fixed;
+    inset: auto 2rem 0.5rem
+  }
+  &-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+}
