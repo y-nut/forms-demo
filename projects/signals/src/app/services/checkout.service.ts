@@ -9,7 +9,10 @@ export class CheckoutService {
   readonly totalNormalPrice = signal(0);
   readonly enablePromoCode = signal(false);
 
-  addProduct(productId: number, qty: number): void {
+  addProduct(productId: number | undefined, qty: number): void {
+    if (typeof productId !== 'number' || typeof qty !== 'number') {
+      return;
+    }
     const itemSignal = this.basket.get(productId);
     if (itemSignal) {
       itemSignal.update((item) => {
@@ -52,6 +55,9 @@ export class CheckoutService {
   }
 
   private calculateTotal(): void {
+    if (!this.basket.size) {
+      this.totalNormalPrice.set(0);
+    }
     const total = Array.from(this.basket.values()).reduce((acc, itemSignal) => {
       const item = itemSignal();
       const product = this.products().find(
