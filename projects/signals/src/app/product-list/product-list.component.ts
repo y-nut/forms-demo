@@ -18,6 +18,7 @@ export class ProductListComponent {
   products = this.checkoutService.products;
   basket = this.checkoutService.basket;
   enablePromoCode = this.checkoutService.enablePromoCode;
+  numberOfProducts = this.checkoutService.numberOfProducts;
 
   get checkoutService() {
     return this.injector.get(CheckoutService);

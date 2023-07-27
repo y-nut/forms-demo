@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { Basket, Product } from '../interfaces/shopping.interface';
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,13 @@ export class CheckoutService {
   readonly totalNormalPrice = signal(0);
   readonly enablePromoCode = signal(false);
 
+  // ! Computed
+  readonly numberOfProducts = computed(() => {
+    const products = this.products();
+    return products.length;
+  });
+
+  // ! Update
   addProduct(productId: number | undefined, qty: number): void {
     if (typeof productId !== 'number' || typeof qty !== 'number') {
       return;
@@ -36,6 +43,7 @@ export class CheckoutService {
     this.calculateTotal();
   }
 
+  // ! Mutate
   applyPromoCode(promoCodeValid: boolean): void {
     this.enablePromoCode.set(promoCodeValid);
     this.products.mutate((products) => {
@@ -54,6 +62,7 @@ export class CheckoutService {
     this.calculateTotal();
   }
 
+  // ! Set
   private calculateTotal(): void {
     if (!this.basket.size) {
       this.totalNormalPrice.set(0);
