@@ -1,4 +1,10 @@
-import { Injectable, WritableSignal, computed, signal } from '@angular/core';
+import {
+  CreateComputedOptions,
+  Injectable,
+  WritableSignal,
+  computed,
+  signal,
+} from '@angular/core';
 import { Basket, Product } from '../interfaces/shopping.interface';
 @Injectable({
   providedIn: 'root',
@@ -10,10 +16,15 @@ export class CheckoutService {
   readonly enablePromoCode = signal(false);
 
   // ! Computed
-  readonly numberOfProducts = computed(() => {
-    const products = this.products();
-    return products.length;
-  });
+  readonly numberOfProducts = computed(
+    () => {
+      const products = this.products();
+      return products.length;
+    },
+    <CreateComputedOptions<number>>{
+      exact: (a: number, b: number) => a === b,
+    }
+  );
 
   // ! Update
   addProduct(productId: number | undefined, qty: number): void {
