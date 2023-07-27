@@ -17,7 +17,7 @@ export class CheckoutService {
 
   // ! Update
   addProduct(productId: number | undefined, qty: number): void {
-    if ([productId, qty].some((v) => typeof v !== 'number')) {
+    if (typeof productId !== 'number' || typeof qty !== 'number') {
       return;
     }
     const itemSignal = this.basket.get(productId);
